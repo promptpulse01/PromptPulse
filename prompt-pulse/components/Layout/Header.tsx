@@ -6,17 +6,22 @@ import { AiOutlineSearch } from 'react-icons/ai'
 import { CgProfile } from 'react-icons/cg'
 import { RxCross1 } from "react-icons/rx";
 import { FaBars } from 'react-icons/fa'
+import { User, currentUser } from '@clerk/nextjs/server';
+import Image from 'next/image'
+import DropDown from './DropDown'
 
 type Props = {
-    activeItem: Number
+    activeItem: Number,
+    user: User | null;
 }
 
 
 
-const Header = ({ activeItem }: Props) => {
+const Header = ({ activeItem, user }: Props) => {
 
     const [active, setactive] = useState(false);
     const [open, setOpen] = useState(false);
+    const [activeProfile, setActiveProfile] = useState(false)
 
     if (typeof window !== "undefined") {
         window.addEventListener("scroll", () => {
@@ -35,6 +40,11 @@ const Header = ({ activeItem }: Props) => {
         }
     };
 
+    
+    const handleProfile = () => {
+        setActiveProfile(!activeProfile)
+    }
+
 
     return (
         <div className={`w-full p-5 border-b min-h-[60px] border-b-[#ffffff32] transition-opacity ${active && "fixed top-0 left-0 bg-[#000] z-[9999]"}`}>
@@ -49,11 +59,26 @@ const Header = ({ activeItem }: Props) => {
                 </div>
                 <div className='flex items-center ml-10'>
                     <AiOutlineSearch className="text-[25px] mr-5 cursor-pointer" />
-                    <Link href="/sign-in">
-                        <CgProfile className="text-[25px] cursor-pointer" />
-                    </Link>
+                    {user ? (
+                        <>
+                        {/* <h1>Rajan</h1> */}
+                            <Image
+                                src={user?.imageUrl}
+                                width={45}
+                                height={45}
+                                alt=''
+                                className='cursor-pointer rounded-full'
+                            />
+                        </>
+                    ) : (
+                        <>
+                            <Link href="/sign-in">
+                                <CgProfile className="text-[25px] cursor-pointer" />
+                            </Link>
+                        </>
+                    )}
                 </div>
-            </div>
+            </div >
             {/* <div className="w-full fixed h-screen overflow-hidden flex justify-center items-center top-0 left-0 bg-[#00000068] z-[9999]">
                 <div className="w-min relative h-[90vh] overflow-y-scroll bg-white rounded-xl shadow">
                     <UserProfile />
@@ -62,7 +87,7 @@ const Header = ({ activeItem }: Props) => {
                     />
                 </div>
             </div> */}
-            <div className="w-full md:hidden flex items-center justify-between">
+            < div className="w-full md:hidden flex items-center justify-between" >
                 <div>
                     <Link href="/" className="font-Inter text-3xl cursor-pointer">
                         <span className="text-[#64ff4c]">Prompt</span>Pulse
@@ -74,21 +99,23 @@ const Header = ({ activeItem }: Props) => {
                         onClick={() => setOpen(!open)}
                     />
                 </div>
-                {open && (
-                    <div
-                        className="fixed md:hidden w-full h-screen top-0 left-0 z-[99999] bg-[unset]"
-                        onClick={handleClose}
-                        id="screen"
-                    >
-                        <div className="fixed bg-black h-screen top-0 right-0 w-[60%] z-[9999]">
-                            <div className="mt-20 p-5">
-                                <Navigation activeItem={activeItem} />
+                {
+                    open && (
+                        <div
+                            className="fixed md:hidden w-full h-screen top-0 left-0 z-[99999] bg-[unset]"
+                            onClick={handleClose}
+                            id="screen"
+                        >
+                            <div className="fixed bg-black h-screen top-0 right-0 w-[60%] z-[9999]">
+                                <div className="mt-20 p-5">
+                                    <Navigation activeItem={activeItem} />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                )}
-            </div>
-        </div>
+                    )
+                }
+            </div >
+        </div >
     )
 }
 
