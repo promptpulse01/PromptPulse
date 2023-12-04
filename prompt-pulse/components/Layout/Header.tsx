@@ -9,6 +9,10 @@ import { FaBars } from 'react-icons/fa'
 import { User, currentUser } from '@clerk/nextjs/server';
 import Image from 'next/image'
 import DropDown from './DropDown'
+import { UserProfile, useClerk } from '@clerk/nextjs'
+import { Button } from '@nextui-org/react'
+import { useRouter } from 'next/navigation'
+import { styles } from '@/utils/styles'
 
 type Props = {
     activeItem: Number,
@@ -45,6 +49,14 @@ const Header = ({ activeItem, user }: Props) => {
         setActiveProfile(!activeProfile)
     }
 
+    const { signOut } = useClerk();
+    const router = useRouter()
+
+    const handlelogout = async()=>{
+       await signOut()
+       router.push("/sign-in");
+    }
+
 
     return (
         <div className={`w-full p-5 border-b min-h-[60px] border-b-[#ffffff32] transition-opacity ${active && "fixed top-0 left-0 bg-[#000] z-[9999]"}`}>
@@ -58,7 +70,7 @@ const Header = ({ activeItem, user }: Props) => {
                     <Navigation activeItem={activeItem} />
                 </div>
                 <div className='flex items-center ml-10'>
-                    <AiOutlineSearch className="text-[25px] mr-5 cursor-pointer" />
+                    <AiOutlineSearch className="text-[25px] mr-5 cursor-pointer " />
                     {user ? (
                         <>
                         {/* <h1>Rajan</h1> */}
@@ -69,6 +81,7 @@ const Header = ({ activeItem, user }: Props) => {
                                 alt=''
                                 className='cursor-pointer rounded-full'
                             />
+                            {/* <Button  className={`${styles.button} !py-2 !px-3 text-center mb-3 ml-10 mt-4 w-full text-white bg-transparent border border-[#16c252] hover:bg-[#16c252] hover:text-black duration-300 transition-opacity font-Inter font-[600]`} onClick={handlelogout}>Logout</Button> */}
                         </>
                     ) : (
                         <>
