@@ -7,7 +7,16 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model users {
-  id   String @id @default(auto()) @map("_id") @db.ObjectId
-  name String
+model Shops {
+   id               String      @id @default(auto()) @map("_id") @db.ObjectId
+  name             String
+  description      String
+  shopProductsType String
+  avatar           String
+  ratings          Float       @default(0)
+  totalSales       Int         @default(0)
+  allProducts      Int         @default(0)
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+  userId           String      @unique
 }
