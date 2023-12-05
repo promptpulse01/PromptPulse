@@ -1,4 +1,4 @@
-
+"use client"
 import Footer from '@/components/Layout/Footer'
 import Header from '@/components/Layout/Header'
 import PromptCard from '@/components/Prompts/PromptCard'
@@ -14,16 +14,35 @@ import axios from 'axios'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { getUser } from '@/actions/users/getUser'
-import {User} from '@clerk/nextjs/server'
+import { User } from '@clerk/nextjs/server'
+import { getShop } from '@/actions/shops/getShop'
 
 
 type Props = {
-  user : User | undefined;
+  user: User | undefined;
+  shopdata: object
+
 }
 
-const RouterPage = async({user}: Props) => {
+const RouterPage = ({ user, shopdata }: Props) => {
 
-    // const data = await getUser()
+  // const data = await getUser()
+
+  const [isSellerExist, setIsSellerExist] = useState(false)
+  // console.log(shopdata)
+
+
+
+  useEffect(() => {
+    if (shopdata?.userId) {
+      // console.log(shopdata?.userId)
+      setIsSellerExist(true)
+    }
+  }, [shopdata])
+  console.log(isSellerExist)
+
+
+
 
 
 
@@ -84,8 +103,8 @@ const RouterPage = async({user}: Props) => {
           <br />
           <BestSeller />
           <Future />
-          <br/>
-          <br/>
+          <br />
+          <br />
           <SellersBanner />
           <br />
           <br />

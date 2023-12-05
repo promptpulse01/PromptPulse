@@ -1,6 +1,9 @@
 "use client"
 import { styles } from '@/utils/styles'
+import { useUser } from '@clerk/nextjs'
 import { Button, Input, Textarea } from '@nextui-org/react'
+import axios from 'axios'
+import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 
 interface Props {
@@ -9,11 +12,16 @@ interface Props {
 
 const Page = (props: Props) => {
 
+    const { user } = useUser()
+
     const [formData, setFormData] = useState({
-        shopname: "",
-        shopdescription: "",
-        shopitems: ""
+        name: "",
+        description: "",
+        shopProductsType: "",
+        avatar: user?.imageUrl || "",
     })
+
+    const router = useRouter()
 
     const handleChange = (e: any) => {
         setFormData({
@@ -22,9 +30,33 @@ const Page = (props: Props) => {
         })
     }
 
-    const handleSubmit = (e: any) => {
+    const handleSubmit = async (e: any) => {
         e.preventDefault()
-        console.log(formData)
+        if (user) {
+            const data = {
+                name: formData.name,
+                description: formData.description,
+                shopProductsType: formData.shopProductsType,
+                avatar: user?.imageUrl || "",
+                userId: user?.id,
+            };
+
+            await axios.post('/api/create-shop',
+                data
+            ).then((res) => {
+                setFormData({
+                    name: "",
+                    description: "",
+                    shopProductsType: "",
+                    avatar: user?.imageUrl || "",
+                })
+                console.log("object")
+
+                router.push('/')
+            }).catch((error) => {
+                console.log(error)
+            })
+        }
     }
     return (
         <div className="w-full h-screen flex flex-col justify-center">
@@ -41,8 +73,8 @@ const Page = (props: Props) => {
                             label="Enter Shop name"
                             size="sm"
                             variant="bordered"
-                            name='shopname'
-                            value={formData.shopname}
+                            name='name'
+                            value={formData.name}
                             onChange={handleChange}
                         />
                     </div>
@@ -57,8 +89,8 @@ const Page = (props: Props) => {
                             size="sm"
                             variant="bordered"
                             maxLength={120}
-                            name='shopdescription'
-                            value={formData.shopdescription}
+                            name='description'
+                            value={formData.description}
                             onChange={handleChange}
                         />
                     </div>
@@ -71,8 +103,8 @@ const Page = (props: Props) => {
                             required
                             placeholder="Chatgpt,Midjoureney Prompts..."
                             className="col-span-12 md:col-span-6 md:mb-0"
-                            name='shopitems'
-                            value={formData.shopitems}
+                            name='shopProductsType'
+                            value={formData.shopProductsType}
                             onChange={handleChange}
                         />
                         <br />
