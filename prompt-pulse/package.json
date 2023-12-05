@@ -9,10 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@clerk/nextjs": "^4.27.2",
+    "@nextui-org/react": "^2.2.9",
     "@prisma/client": "^5.6.0",
+    "axios": "^1.6.2",
+    "marquee": "^0.2.1",
     "next": "14.0.3",
     "react": "^18",
     "react-dom": "^18",
+    "react-fast-marquee": "^1.6.2",
     "react-icons": "^4.12.0"
   },
   "devDependencies": {
