@@ -16,7 +16,7 @@ import { styles } from '@/utils/styles'
 
 type Props = {
     activeItem: Number,
-    user: User | null;
+    user: User | undefined;
 }
 
 
