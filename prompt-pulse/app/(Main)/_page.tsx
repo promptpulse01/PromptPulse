@@ -22,13 +22,15 @@ type Props = {
 }
 
 const RouterPage = ({ user, shopdata }: Props) => {
+
+  console.log(user)
   const [isSellerExist, setIsSellerExist] = useState(false)
   useEffect(() => {
     if (shopdata?.userId) {
       setIsSellerExist(true)
     }
   }, [shopdata])
-  console.log(isSellerExist)
+  // console.log(isSellerExist)
   return (
     <>
       <div className="banner">
