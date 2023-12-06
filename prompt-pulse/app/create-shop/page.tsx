@@ -5,6 +5,7 @@ import { Button, Input, Textarea } from '@nextui-org/react'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
+import {toast} from "sonner"
 
 interface Props {
 
@@ -51,9 +52,14 @@ const Page = (props: Props) => {
                     avatar: user?.imageUrl || "",
                 })
                 console.log("object")
-
+                toast.success("Shop created successfully",{
+                    className: "font-Monserrat text-green-500",
+                })
                 router.push('/')
             }).catch((error) => {
+                toast.error("User has already created a shop",{
+                    className: "font-Monserrat text-red-500",
+                })
                 console.log(error)
             })
         }
