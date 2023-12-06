@@ -23,6 +23,8 @@ const Header = ({ activeItem, user }: Props) => {
     const [open, setOpen] = useState(false);
     const [activeProfile, setActiveProfile] = useState(false)
 
+    
+
     if (typeof window !== "undefined") {
         window.addEventListener("scroll", () => {
             if (window.scrollY > 100) {
@@ -40,7 +42,7 @@ const Header = ({ activeItem, user }: Props) => {
         }
     };
 
-    
+
     const handleProfile = () => {
         setActiveProfile(!activeProfile)
     }
@@ -48,9 +50,15 @@ const Header = ({ activeItem, user }: Props) => {
     const { signOut } = useClerk();
     const router = useRouter()
 
-    const handlelogout = async()=>{
-       await signOut()
-       router.push("/sign-in");
+    const handlelogout = async () => {
+        await signOut()
+        router.push("/sign-in");
+    }
+
+
+
+    const linkProfile = () => {
+        router.push(`/profile`)
     }
 
 
@@ -75,6 +83,7 @@ const Header = ({ activeItem, user }: Props) => {
                                 height={45}
                                 alt=''
                                 className='cursor-pointer rounded-full'
+                                onClick={linkProfile}
                             />
                         </>
                     ) : (
