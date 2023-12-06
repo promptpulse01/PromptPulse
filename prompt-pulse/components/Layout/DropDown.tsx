@@ -2,11 +2,9 @@ import { styles } from '@/utils/styles';
 import { useClerk } from '@clerk/nextjs';
 import { User } from '@clerk/nextjs/server';
 import { Avatar, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@nextui-org/react';
-import Link from 'next/link';
 import { useRouter } from "next/navigation";
 import React from 'react'
 import { AiOutlineLogout } from 'react-icons/ai';
-import { TbSwitchVertical } from "react-icons/tb";
 
 interface Props {
     user: User | null;
