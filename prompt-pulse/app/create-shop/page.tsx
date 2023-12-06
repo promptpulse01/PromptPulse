@@ -15,6 +15,8 @@ const Page = (props: Props) => {
 
     const { user } = useUser()
 
+    const [loading, setLoading] = useState(false)
+
     const [formData, setFormData] = useState({
         name: "",
         description: "",
@@ -33,6 +35,7 @@ const Page = (props: Props) => {
 
     const handleSubmit = async (e: any) => {
         e.preventDefault()
+        setLoading(true)
         if (user) {
             const data = {
                 name: formData.name,
@@ -45,6 +48,7 @@ const Page = (props: Props) => {
             await axios.post('/api/create-shop',
                 data
             ).then((res) => {
+                setLoading(false)
                 setFormData({
                     name: "",
                     description: "",
@@ -57,7 +61,8 @@ const Page = (props: Props) => {
                 })
                 router.push('/')
             }).catch((error) => {
-                toast.error("User has already created a shop",{
+                setLoading(false)
+                toast.error("You have already created a shop",{
                     className: "font-Monserrat text-red-500",
                 })
                 console.log(error)
@@ -116,7 +121,7 @@ const Page = (props: Props) => {
                         <br />
                         <Button
                             className="mb-3 w-full bg-transparent h-[45px] border border-[#16c252] text-[#16c252] hover:bg-[#16c252] hover:text-black duration-300 transition-opacity font-Inter font-[600]"
-                            type="submit"
+                            type="submit" disabled={loading}   disableAnimation={loading}
                         >
                             Create Shop
                         </Button>
