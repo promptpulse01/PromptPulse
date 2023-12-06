@@ -4,15 +4,11 @@ import React, { useState } from 'react'
 import Navigation from './Navigation'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { CgProfile } from 'react-icons/cg'
-import { RxCross1 } from "react-icons/rx";
 import { FaBars } from 'react-icons/fa'
 import { User, currentUser } from '@clerk/nextjs/server';
 import Image from 'next/image'
-import DropDown from './DropDown'
-import { UserProfile, useClerk } from '@clerk/nextjs'
-import { Button } from '@nextui-org/react'
+import { useClerk } from '@clerk/nextjs'
 import { useRouter } from 'next/navigation'
-import { styles } from '@/utils/styles'
 
 type Props = {
     activeItem: Number,
@@ -73,7 +69,6 @@ const Header = ({ activeItem, user }: Props) => {
                     <AiOutlineSearch className="text-[25px] mr-5 cursor-pointer " />
                     {user ? (
                         <>
-                        {/* <h1>Rajan</h1> */}
                             <Image
                                 src={user?.imageUrl}
                                 width={45}
@@ -81,7 +76,6 @@ const Header = ({ activeItem, user }: Props) => {
                                 alt=''
                                 className='cursor-pointer rounded-full'
                             />
-                            {/* <Button  className={`${styles.button} !py-2 !px-3 text-center mb-3 ml-10 mt-4 w-full text-white bg-transparent border border-[#16c252] hover:bg-[#16c252] hover:text-black duration-300 transition-opacity font-Inter font-[600]`} onClick={handlelogout}>Logout</Button> */}
                         </>
                     ) : (
                         <>
@@ -92,14 +86,6 @@ const Header = ({ activeItem, user }: Props) => {
                     )}
                 </div>
             </div >
-            {/* <div className="w-full fixed h-screen overflow-hidden flex justify-center items-center top-0 left-0 bg-[#00000068] z-[9999]">
-                <div className="w-min relative h-[90vh] overflow-y-scroll bg-white rounded-xl shadow">
-                    <UserProfile />
-                    <RxCross1
-                        className="absolute text-black text-2xl top-10 right-10 cursor-pointer"
-                    />
-                </div>
-            </div> */}
             < div className="w-full md:hidden flex items-center justify-between" >
                 <div>
                     <Link href="/" className="font-Inter text-3xl cursor-pointer">

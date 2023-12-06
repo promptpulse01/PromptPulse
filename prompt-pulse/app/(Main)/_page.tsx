@@ -7,69 +7,28 @@ import Future from '@/components/Route/Future'
 import Hero from '@/components/Route/Hero'
 import BestSeller from '@/components/Shop/BestSeller'
 import SellersBanner from '@/components/Shop/SellersBanner'
-import Loader from '@/utils/Loader'
 import { styles } from '@/utils/styles'
 import { Divider } from '@nextui-org/react'
-import axios from 'axios'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import { getUser } from '@/actions/users/getUser'
 import { User } from '@clerk/nextjs/server'
-import { getShop } from '@/actions/shops/getShop'
+import type {Shop} from '../../types'
 
 
 type Props = {
   user: User | undefined;
-  shopdata: object
+  shopdata: Shop | undefined;
 
 }
 
 const RouterPage = ({ user, shopdata }: Props) => {
-
-  // const data = await getUser()
-
   const [isSellerExist, setIsSellerExist] = useState(false)
-  // console.log(shopdata)
-
-
-
   useEffect(() => {
     if (shopdata?.userId) {
-      // console.log(shopdata?.userId)
       setIsSellerExist(true)
     }
   }, [shopdata])
   console.log(isSellerExist)
-
-
-
-
-
-
-
-  // const [user, setUser] = useState(null)
-  // const [loading, setLoading] = useState(true)
-
-  // const users = async () => { await getUsers() }
-  // console.log(users)
-
-  // useEffect(() => {
-  //   users()
-  //     , []
-  // })
-  // useEffect(() => {
-  //   axios.get('/api/me').then((res) => {
-  //     // setLoading(false)
-  //     setUser(res.data.user)
-  //   }).catch((error) => {
-  //     // setLoading(true)
-  //     console.log(error)
-  //   })
-  // }, [])
-
-
-  // console.log(user)
-
   return (
     <>
       <div className="banner">
@@ -112,18 +71,6 @@ const RouterPage = ({ user, shopdata }: Props) => {
           <Footer />
         </div>
       </div>
-      {/* {loading ? (
-        <>
-          <Loader />
-        </>
-      ) : (
-        <>
-          <div className="banner">
-            <Header activeItem={0} user={user} />
-            <Hero />
-          </div>
-        </>
-      )} */}
     </>
   )
 }
