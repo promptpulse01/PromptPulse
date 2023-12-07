@@ -27,9 +27,8 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
-# /.env*.local
-# prompt-pulse/.env
-# /.env
+/.env*.local
+/prompt-pulse/.env
 
 # vercel
 .vercel
