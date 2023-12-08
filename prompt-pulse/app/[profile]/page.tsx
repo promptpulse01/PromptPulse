@@ -23,7 +23,6 @@ const Page = async (props: Props) => {
                 }
             </div>
             <div className="md:w-[80%] 2xl:w-[83%]">
-
             </div>
         </div>
     )

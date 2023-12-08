@@ -23,7 +23,7 @@ type Props = {
 
 const RouterPage = ({ user, shopdata }: Props) => {
 
-  console.log(user)
+  // console.log(user)
   const [isSellerExist, setIsSellerExist] = useState(false)
   useEffect(() => {
     if (shopdata?.userId) {
