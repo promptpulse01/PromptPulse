@@ -1,7 +1,13 @@
 "use client"
 import { styles } from '@/utils/styles'
+import { useAuth } from '@clerk/nextjs';
 import { Button, Input, Select, SelectItem, Selection, Textarea } from '@nextui-org/react'
-import React, { ChangeEvent, useState } from 'react'
+import axios from 'axios';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import React, { ChangeEvent, DragEvent, useState } from 'react'
+import { IoDocumentAttachOutline } from 'react-icons/io5'
+import { toast } from 'sonner';
 
 interface Props { }
 
@@ -45,24 +51,133 @@ const UploadPrompt = (props: Props) => {
   })
 
   const [category, setCategory] = useState<Selection>(new Set([]));
+  const [dragging, setDragging] = useState<Boolean>(false)
+  const { userId } = useAuth();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const router = useRouter()
 
   const handleImageFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-        const files = Array.from(e.target.files);
+      const files = Array.from(e.target.files);
 
-        files.forEach((file) => {
-            const reader = new FileReader();
-            reader.onload = () => {
-                if (reader.readyState === 2) {
-                    setPromptData((prevData) => ({
-                        ...prevData,
-                        images: [...prevData.images, reader.result as string],
-                    }));
-                }
-            };
-            reader.readAsDataURL(file);
-        });
+      files.forEach((file) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          if (reader.readyState === 2) {
+            setPromptData((prevData) => ({
+              ...prevData,
+              images: [...prevData.images, reader.result as string],
+            }));
+          }
+        };
+        reader.readAsDataURL(file);
+      });
     }
+  };
+  const handleAttachmentFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const files = Array.from(e.target.files);
+
+      files.forEach((file) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          if (reader.readyState === 2) {
+            setPromptData((prevData) => ({
+              ...prevData,
+              attachments: [...prevData.attachments, reader.result as string],
+            }));
+          }
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+  };
+
+  const handleDragOver = (e: DragEvent<HTMLLabelElement>) => {
+    e.preventDefault();
+    setDragging(true);
+  };
+
+  const handleDragLeave = (e: DragEvent<HTMLLabelElement>) => {
+    e.preventDefault();
+    setDragging(false);
+  };
+
+  const handleImageDrop = (e: DragEvent<HTMLLabelElement>) => {
+    e.preventDefault();
+    setDragging(false);
+
+    if (e.dataTransfer.files) {
+      const files = Array.from(e.dataTransfer.files);
+
+      files.forEach((file) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          if (reader.readyState === 2) {
+            setPromptData((prevData) => ({
+              ...prevData,
+              images: [...prevData.images, reader.result as string],
+            }));
+          }
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+  };
+
+  const handleAttachmentDrop = (e: DragEvent<HTMLLabelElement>) => {
+    e.preventDefault();
+    setDragging(false);
+    if (e.dataTransfer.files) {
+      const files = Array.from(e.dataTransfer.files);
+
+      files.forEach((file) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          if (reader.readyState === 2) {
+            setPromptData((prevData) => ({
+              ...prevData,
+              attachments: [...prevData.attachments, reader.result as string],
+            }));
+          }
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsLoading(true);
+    const categoryString = Array.from(category).join(",");
+    console.log("object")
+    await axios
+        .post("/api/create-prompt", {
+            ...promptData,
+            category: categoryString,
+            sellerId: userId,
+        })
+        .then((res) => {
+            setIsLoading(false);
+            toast.success("Prompt uploaded successfully");
+            setPromptData({
+                name: "",
+                shortDescription: "",
+                description: "",
+                images: [],
+                attachments: [],
+                estimatedPrice: "",
+                price: "",
+                tags: "",
+            });
+            router.push("/");
+        })
+        .catch((error) => {
+            setIsLoading(false);
+            console.log(error);
+            toast.error(error.message);
+        });
 };
 
   const handleSelectionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -75,7 +190,7 @@ const UploadPrompt = (props: Props) => {
         Upload Your Prompt
       </h1>
       <br />
-      <form className="w-[90%] m-auto">
+      <form className="w-[90%] m-auto" onSubmit={handleSubmit}>
         <Input
           type="text"
           label="Title"
@@ -102,7 +217,7 @@ const UploadPrompt = (props: Props) => {
         <br />
         <Textarea
           variant={"bordered"}
-          label="Description"
+          label=" Detailed Description"
           required
           size="lg"
           value={promptData.description}
@@ -193,11 +308,29 @@ const UploadPrompt = (props: Props) => {
           />
           <label
             htmlFor="file"
-            className={`w-full rounded-md min-h-[15vh] border-white p-3 border  flex items-center justify-center `}
+            className={`w-full rounded-md min-h-[15vh] border-white p-3 border  flex items-center justify-center ${dragging ? "bg-blue-500" : "bg-transparent"}`}
+            onDragOver={handleDragOver}
+            onDragLeave={handleDragLeave}
+            onDrop={handleImageDrop}
           >
-            <span className="text-white">
-              Drag and drop your prompt images here or click to browse
-            </span>
+            {promptData.images.length !== 0 ? (
+              <div className="w-full flex flex-wrap">
+                {promptData.images.map((item) => (
+                  <Image
+                    src={item}
+                    alt=""
+                    width={500}
+                    height={400}
+                    key={item}
+                    className="w-full md:w-[48%] object-cover md:m-2 my-2"
+                  />
+                ))}
+              </div>
+            ) : (
+              <span className="text-white">
+                Drag and drop your prompt images here or click to browse
+              </span>
+            )}
           </label>
         </div>
         <br />
@@ -206,18 +339,33 @@ const UploadPrompt = (props: Props) => {
           <input
             type="file"
             required
-            accept="image/*"
+            accept=".txt, .pdf"
             multiple
-            id="file"
+            id="attachment"
             className="hidden"
+            onChange={handleAttachmentFileChange}
           />
           <label
-            htmlFor="file"
-            className={`w-full rounded-md min-h-[15vh] border-white p-3 border  flex items-center justify-center `}
+            htmlFor="attachment"
+            className={`w-full rounded-md min-h-[15vh] border-white p-3 border  flex items-center justify-center ${dragging ? "bg-blue-500" : "bg-transparent"
+              }`}
+            onDragOver={handleDragOver}
+            onDragLeave={handleDragLeave}
+            onDrop={handleAttachmentDrop}
           >
-            <span className="text-white">
-              Drag and drop your prompt files here or click to browse
-            </span>
+            {promptData.attachments.length !== 0 ? (
+              <div className="flex items-center">
+                <IoDocumentAttachOutline className="text-3xl" />
+                <span className={`${styles.label} pl-2 !text-2xl pt-1`}>
+                  {promptData?.attachments?.length}{" "}
+                  {promptData?.attachments?.length > 1 ? "files" : "file"}
+                </span>
+              </div>
+            ) : (
+              <span className="text-white">
+                Drag and drop your prompt files here or click to browse
+              </span>
+            )}
           </label>
         </div>
         <br />
@@ -227,13 +375,14 @@ const UploadPrompt = (props: Props) => {
             color="primary"
             className={`${styles.button}`}
             type="submit"
+            disabled={isLoading}
+            disableAnimation={isLoading}
           >
             Upload your prompt
           </Button>
         </div>
         <br />
         <br />
-
       </form>
     </div>
   )
