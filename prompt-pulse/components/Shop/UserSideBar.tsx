@@ -23,7 +23,7 @@ const sideBarItems = [
 
 const UserSideBar = ({ active }: Props) => {
     return (
-        <div>
+        <div >
             {sideBarItems.map((item, index) => (
                 <div className="w-full mx-5 my-10" key={index}>
                     <Link href={item.href}>
