@@ -1,12 +1,11 @@
+'use client'
 import React from 'react'
 import { GoArrowSwitch } from "react-icons/go";
 import Link from "next/link";
 import { styles } from "@/utils/styles";
 import { CgProfile } from "react-icons/cg";
+import { usePathname } from 'next/navigation';
 
-interface Props {
-    active: number
-}
 const sideBarItems = [
     {
         icon: <CgProfile />,
@@ -21,7 +20,8 @@ const sideBarItems = [
   
 ];
 
-const UserSideBar = ({ active }: Props) => {
+const UserSideBar = () => {
+    const pathname = usePathname()
     return (
         <div >
             {sideBarItems.map((item, index) => (
@@ -29,13 +29,13 @@ const UserSideBar = ({ active }: Props) => {
                     <Link href={item.href}>
                         <div className="flex items-center">
                             <div
-                                className={`text-3xl ${active !== index ? "!text-white" : "!text-[#858DFB]"
+                                className={`text-3xl ${item.href !== pathname ? "!text-white" : "!text-[#858DFB]"
                                     }`}
                             >
                                 {item.icon}
                             </div>
                             <span
-                                className={`${styles.label} ${active !== index ? "!text-white" : "!text-[#858DFB]"
+                                className={`${styles.label} ${item.href !== pathname ? "!text-white" : "!text-[#858DFB]"
                                     } pl-4`}
                             >
                                 {item.title}
