@@ -1,5 +1,4 @@
 "use client"
-import UserSideBar from '@/components/Shop/UserSideBar'
 import { styles } from '@/utils/styles'
 import { Button } from '@nextui-org/react'
 import { useRouter } from 'next/navigation'
@@ -22,11 +21,7 @@ const Page = (props: Props) => {
     }
 
     return (
-        <div className="flex w-full">
-            <div className="h-screen sticky top-0 left-0  flex p-2 bg-[#111C42] md:w-[20%] 2xl:w-[17%]">
-                <UserSideBar active={1} />
-            </div>
-            <div className="md:w-[80%] 2xl:w-[83%]">
+        <>
                 <h1 className='text-center mt-10 font-bold text-[32px]'>Unleash the Power of AI Prompts: Become a Seller Today!</h1>
                 <p className='text-start mt-5 text-[18px] text-[#6B7280] leading-7 ml-28 mr-28'>Do you possess the creative spark to craft compelling AI prompts that ignite imagination and drive engagement? <br /> Do you have a passion for language and a knack for generating ideas that spark innovation? <br />If so, then  <span className='text-red-400 font-extrabold'>becoming a seller on our Prompt Pulse could be the perfect opportunity for you! </span></p>
                 <p className='text-start mt-10 text-[18px] text-[#6B7280] leading-7 ml-28 mr-28 font-semibold'>Here's why you should join our vibrant community of AI Prompt creators:</p>
@@ -57,8 +52,7 @@ const Page = (props: Props) => {
                 <div className='flex justify-center items-center'>
                     <Button className={`${styles.button}} bg-blue-600  mt-10 `} type="submit" disabled={!isAgreed} onClick={handleClick}> Submit </Button>
                 </div>
-            </div>
-        </div>
+            </>
     )
 }
 

@@ -173,7 +173,7 @@ const UploadPrompt = (props: Props) => {
             .catch((error) => {
                 setIsLoading(false);
                 console.log(error);
-                // toast.error(error.data.message);
+                toast.error(error.data.message);
             });
     };
 

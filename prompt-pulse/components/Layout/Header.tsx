@@ -50,18 +50,11 @@ const Header = ({ activeItem, user }: Props) => {
     const { signOut } = useClerk();
     const router = useRouter()
 
+
     const handlelogout = async () => {
         await signOut()
         router.push("/sign-in");
     }
-
-
-
-    const linkProfile = () => {
-        router.push(`/profile`)
-    }
-
-
     return (
         <div className={`w-full p-5 border-b min-h-[60px] border-b-[#ffffff32] transition-opacity ${active && "fixed top-0 left-0 bg-[#000] z-[9999]"}`}>
             <div className="hidden md:w-[90%] mx-auto md:flex items-center justify-between">
@@ -71,7 +64,7 @@ const Header = ({ activeItem, user }: Props) => {
                     </Link>
                 </div>
                 <div>
-                    <Navigation activeItem={activeItem} />
+                    <Navigation />
                 </div>
                 <div className='flex items-center ml-10'>
                     <AiOutlineSearch className="text-[25px] mr-5 cursor-pointer " />
@@ -83,7 +76,9 @@ const Header = ({ activeItem, user }: Props) => {
                                 height={45}
                                 alt=''
                                 className='cursor-pointer rounded-full'
-                                onClick={linkProfile}
+                                onClick={()=>{
+                                    router.push('/profile')
+                                }}
                             />
                         </>
                     ) : (
@@ -116,7 +111,7 @@ const Header = ({ activeItem, user }: Props) => {
                         >
                             <div className="fixed bg-black h-screen top-0 right-0 w-[60%] z-[9999]">
                                 <div className="mt-20 p-5">
-                                    <Navigation activeItem={activeItem} />
+                                    <Navigation />
                                 </div>
                             </div>
                         </div>
