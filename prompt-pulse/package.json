@@ -11,7 +11,7 @@
   "dependencies": {
     "@clerk/nextjs": "^4.27.2",
     "@nextui-org/react": "^2.2.9",
-    "@prisma/client": "^5.6.0",
+    "@prisma/client": "^5.7.0",
     "axios": "^1.6.2",
     "cloudinary": "^1.41.0",
     "marquee": "^0.2.1",

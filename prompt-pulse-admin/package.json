@@ -10,10 +10,15 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^4.27.5",
+    "@mui/icons-material": "^5.14.19",
+    "@mui/material": "^5.14.20",
+    "@mui/x-data-grid": "^6.18.4",
     "@nextui-org/react": "^2.2.9",
+    "@prisma/client": "^5.7.0",
     "next": "14.0.4",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-pro-sidebar": "^0.7.1"
   },
   "devDependencies": {
     "@types/node": "^20",

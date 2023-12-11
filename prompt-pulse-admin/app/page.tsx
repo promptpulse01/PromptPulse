@@ -1,14 +1,15 @@
-"use client"
+
 import Error from '@/components/Error'
-import { useAdmin } from '@/utils/useAdmin'
+import Sidebar from '@/components/Sidebar'
+import { useIsAdmin } from '@/utils/useAdmin'
+
 import React from 'react'
 
-type Props = {}
 
-const Page = async (props: Props) => {
+const Page = async () => {
 
 
-  const isAdmin = await useAdmin()
+  const isAdmin = await useIsAdmin()
 
 
   return (
@@ -16,7 +17,12 @@ const Page = async (props: Props) => {
       {isAdmin ? (
         <>
           <div>
-            <h1 className='text-center font-semibold text-white text-5xl'>Hello <span className='text-[#64FF4B]'>Nikita</span></h1>
+            <h1 className='text-center font-semibold text-white text-5xl'>Hello <span className='text-[#64FF4B]'>AFKians</span></h1>
+            <div className="flex min-h-screen">
+              <div className="2xl:w-[16%] w-1/5">
+                <Sidebar activeItem="Dashboard" />
+              </div>
+              </div>
           </div>
         </>
       ) : (
