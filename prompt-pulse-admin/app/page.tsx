@@ -1,4 +1,3 @@
-
 import Error from '@/components/Error'
 import Sidebar from '@/components/Sidebar'
 import { useIsAdmin } from '@/utils/useAdmin'
