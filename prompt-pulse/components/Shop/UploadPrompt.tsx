@@ -168,7 +168,7 @@ const UploadPrompt = (props: Props) => {
                     price: "",
                     tags: "",
                 });
-                router.push('/profile')
+                router.push(`/profile/${userId}`);
             })
             .catch((error) => {
                 setIsLoading(false);

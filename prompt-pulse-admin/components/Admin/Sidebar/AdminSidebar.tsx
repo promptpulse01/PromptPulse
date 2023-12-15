@@ -17,7 +17,7 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import { useClerk } from "@clerk/nextjs";
-import photo from '@/public/img.jpeg'
+import { useSelectedLayoutSegment } from "next/navigation";
 
 interface itemProps {
   title: string;
@@ -30,7 +30,7 @@ interface itemProps {
 const Item: FC<itemProps> = ({ title, to, icon, selected, setSelected }) => {
   return (
     <MenuItem
-      active={selected === title}
+      active={"/"+selected === to}
       onClick={() => setSelected(title)}
       icon={icon}
       className="my-5"
@@ -43,12 +43,9 @@ const Item: FC<itemProps> = ({ title, to, icon, selected, setSelected }) => {
   );
 };
 
-interface Props {
-  selected: string;
-  setSelected: any;
-}
 
-const Sidebar = ({ selected, setSelected }: Props) => {
+
+const Sidebar = ({ user }: any) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [mounted, setMounted] = useState(false);
   const { signOut } = useClerk();
@@ -64,7 +61,8 @@ const Sidebar = ({ selected, setSelected }: Props) => {
   const logoutHandler = async () => {
     await signOut();
   };
-
+  let param=useSelectedLayoutSegment() || 'dashboard';
+  console.log(param)
   return (
     <Box
       sx={{
@@ -140,13 +138,14 @@ const Sidebar = ({ selected, setSelected }: Props) => {
                   width={100}
                   height={100}
                   src={
-                    photo
+                    user?.imageUrl
                   }
                   style={{
                     cursor: "pointer",
                     borderRadius: "50%",
                     border: "3px solid #5b6fe6",
                   }}
+                  priority
                 />
               </Box>
               <Box textAlign="center">
@@ -155,7 +154,7 @@ const Sidebar = ({ selected, setSelected }: Props) => {
                   className="!text-[20px]  text-[#ffffffc1]"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  Rajan Vanikar
+                  {user?.firstName+ " "+user?.lastName}
                 </Typography>
                 <Typography
                   variant="h6"
@@ -173,53 +172,53 @@ const Sidebar = ({ selected, setSelected }: Props) => {
               title="Dashboard"
               to="/"
               icon={<HomeOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
+              selected={param}
+              setSelected={param}
             />
             <Item
               title="Users"
               to="/users"
               icon={<GroupsIcon />}
-              selected={selected}
-              setSelected={setSelected}
+              selected={param}
+              setSelected={param}
             />
 
             <Item
               title="Shops"
               to="/shops"
               icon={<StorefrontIcon />}
-              selected={selected}
-              setSelected={setSelected}
+              selected={param}
+              setSelected={param}
             />
 
             <Item
               title="Invoices"
               to="/invoices"
               icon={<ReceiptOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
+              selected={param}
+              setSelected={param}
             />
             <Item
               title="All Prompts"
               to="/prompts"
               icon={<MapOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
+              selected={param}
+              setSelected={param}
             />
             <Item
               title="Withdraw requests"
               to="/withdraw-requests"
               icon={<ManageHistoryIcon />}
-              selected={selected}
-              setSelected={setSelected}
+              selected={param}
+              setSelected={param}
             />
             <div onClick={logoutHandler}>
               <Item
                 title="Logout"
                 to="/"
                 icon={<ExitToAppIcon />}
-                selected={selected}
-                setSelected={setSelected}
+                selected={param}
+                setSelected={param}
               />
             </div>
           </Box>
