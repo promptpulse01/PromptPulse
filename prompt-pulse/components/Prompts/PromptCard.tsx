@@ -49,7 +49,7 @@ const PromptCard = (props: Props) => {
             <div className="w-full flex items-center justify-between">
                 <div className="flex items-center">
                     <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026302d" />
-                    <span className={`${styles.label} pl-3`}>@Rajan Vanikar</span>
+                    <span className={`${styles.label} pl-3`}>@Jenisha Bhatia</span>
                 </div>
                 <Ratings rating={4.5} />
             </div>
