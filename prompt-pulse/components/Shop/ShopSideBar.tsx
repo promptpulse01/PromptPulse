@@ -10,12 +10,13 @@ import Link from "next/link";
 import { styles } from "@/utils/styles";
 import { CgProfile } from "react-icons/cg";
 import { usePathname } from 'next/navigation';
+import { useParams } from 'next/navigation';
 
 const sideBarItems = [
     {
         icon: <CgProfile />,
         title: "Profile",
-        href: `/profile`,
+        href: "",
     },
     {
         icon: <GoHome />,
@@ -25,47 +26,48 @@ const sideBarItems = [
     {
         icon: <MdOutlineCreateNewFolder />,
         title: "Upload Prompt",
-        href: "/profile/upload-prompt",
+        href: `/upload-prompt`,
     },
     {
         icon: <BsWallet2 />,
         title: "Prompts",
-        href: "/shop/prompts",
+        href: "/prompts",
     },
     {
         icon: <TbMoneybag />,
         title: "Orders",
-        href: "/shop/orders",
+        href: "/orders",
     },
     {
         icon: <LiaFileInvoiceDollarSolid />,
         title: "Invoices",
-        href: "/shop/invoices",
+        href: "/invoices",
     },
     {
         icon: <BiMoneyWithdraw />,
         title: "Withdraw Earnings",
-        href: "/shop/withdraw",
+        href: "/withdraw",
     },
   
 ];
 
 const ShopSidebar = () => {
     const pathname = usePathname()
+    const params= useParams()
     return (
         <div>
             {sideBarItems.map((item, index) => (
                 <div className="w-full mx-5 my-10" key={index}>
-                    <Link href={item.href}>
+                    <Link href={`/profile/${params.profile}${item.href}`}>
                         <div className="flex items-center">
                             <div
-                                className={`text-3xl ${item.href !== pathname ? "!text-white" : "!text-[#858DFB]"
+                                className={`text-3xl ${ `/profile/${params.profile}${item.href}` !== pathname ? "!text-white" : "!text-[#858DFB]"
                                     }`}
                             >
                                 {item.icon}
                             </div>
                             <span
-                                className={`${styles.label} ${item.href !== pathname ? "!text-white" : "!text-[#858DFB]"
+                                className={`${styles.label} ${`/profile/${params.profile}${item.href}`  !== pathname ? "!text-white" : "!text-[#858DFB]"
                                     } pl-4`}
                             >
                                 {item.title}

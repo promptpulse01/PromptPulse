@@ -77,7 +77,7 @@ const Header = ({ activeItem, user }: Props) => {
                                 alt=''
                                 className='cursor-pointer rounded-full'
                                 onClick={()=>{
-                                    router.push('/profile')
+                                    router.push(`/profile/${user?.id}`)
                                 }}
                             />
                         </>
