@@ -1,10 +1,6 @@
 "use client";
 import { DataGrid } from "@mui/x-data-grid";
-import { Box, Modal } from "@mui/material";
-import { BsPencil } from "react-icons/bs";
-import { useState } from "react";
-import { styles } from "@/utils/styles";
-import { updatePromptStatus } from "@/actions/prompts/updatePromptStatus";
+import { Box} from "@mui/material";
 
 type PromptsDataTypes = {
   id: string;
@@ -17,12 +13,6 @@ type PromptsDataTypes = {
 };
 
 const UserPrompts = ({ data }: { data: any[] | undefined }) => {
-  const [open, setOpen] = useState(false);
-  const [status, setStatus] = useState(
-    "Pending" as "Pending" | "Live" | "Declined"
-  );
-  const [promptId, setpromptId] = useState("");
-
   const columns = [
     { field: "id", headerName: "ID", flex: 0.5 },
     { field: "name", headerName: "Prompts Title", flex: 0.8 },
@@ -33,20 +23,6 @@ const UserPrompts = ({ data }: { data: any[] | undefined }) => {
       field: "status",
       headerName: "Status",
       flex: 0.5,
-      renderCell: (params: any) => {
-        return (
-          <div
-            className="w-full flex items-center"
-            onClick={() => setpromptId(params.row.id)}
-          >
-            <span>{params.row.status || ""}</span>
-            <BsPencil
-              className="text-sm cursor-pointer ml-2"
-              onClick={() => setOpen(true)}
-            />
-          </div>
-        );
-      },
     },
   ];
 
@@ -63,12 +39,6 @@ const UserPrompts = ({ data }: { data: any[] | undefined }) => {
         status: prompt.status,
       })
     );
-
-  const updatePromptStatusHandler = async () => {
-    await updatePromptStatus({ promptId, status });
-    setOpen(false);
-    window.location.reload();
-  };
 
   return (
     <>
@@ -125,40 +95,6 @@ const UserPrompts = ({ data }: { data: any[] | undefined }) => {
         </Box>
       </Box>
 
-      {open && (
-        <Modal
-          open
-          onClose={() => setOpen(!open)}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-          className="w-full flex fixed top-0 left-0 h-screen z-[999999999999]"
-        >
-          <Box className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[450px] bg-slate-900 rounded-[8px] shadow p-4 outline-none">
-            <h1 className="text-2xl font-bold text-center text-white">
-              Update Status
-            </h1>
-            <select
-              name=""
-              id=""
-              className={`${styles.input} !mt-6 bg-transparent border rounded p-2`}
-              onChange={(e) =>
-                setStatus(e.target.value as "Pending" | "Live" | "Declined")
-              }
-            >
-              <option value="Pending">Pending</option>
-              <option value="Live">Live</option>
-              <option value="Declined">Declined</option>
-            </select>
-            <br />
-            <button
-              className={`${styles.button} bg-[#3f4cda] my-6 !h-[35px]`}
-              onClick={updatePromptStatusHandler}
-            >
-              Submit
-            </button>
-          </Box>
-        </Modal>
-      )}
     </>
   );
 };
