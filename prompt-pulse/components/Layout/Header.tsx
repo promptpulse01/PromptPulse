@@ -22,6 +22,7 @@ const Header = ({ activeItem, user }: Props) => {
     const [active, setactive] = useState(false);
     const [open, setOpen] = useState(false);
     const [activeProfile, setActiveProfile] = useState(false)
+    
 
     
 

@@ -1,3 +1,4 @@
+import { getAllPrompts } from '@/actions/prompts/getAllPrmopts'
 import Ratings from '@/utils/Ratings'
 import { styles } from '@/utils/styles'
 import { Avatar, Card, Divider } from '@nextui-org/react'
@@ -9,20 +10,33 @@ interface Props {
 
 }
 
-const PromptCard = (props: Props) => {
+const PromptCard = async (props: Props) => {
+
+    const promptdata = JSON.parse(JSON.stringify(await getAllPrompts()));
+    console.log(promptdata[0].id)
+
     return (
         <Card
             radius="lg"
             className="w-full md:w-[31%] 2xl:w-[23%] max-h-[410px] p-4 bg-[#130f23] m-3"
         >
+           
             <div className="relative">
-                <Image
-                    src="https://pixner.net/aikeu/assets/images/category/fourteen.png"
-                    alt=""
-                    className="w-full !max-h-[200px] object-cover"
-                    width={300}
-                    height={300}
-                />
+                {promptdata.map((item) => (
+                    <>
+                        <div key={item.id}>
+                            <Image
+                                src={item?.images[0].url}
+                                alt=""
+                                className="w-full !max-h-[200px] object-cover"
+                                width={300}
+                                height={300}
+                                loading='lazy'
+                            />
+                        </div>
+                    </>
+                ))}
+
                 <div className="absolute bottom-2 left-2">
                     <div className="w-max bg-black hover:bg-[#16252] duration-300 transition-opacity hover:text-black text-white p-[10px] items-center flex rounded-xl">
 

@@ -145,9 +145,9 @@ const AllPrompts = ({ data }: { data: any[] | undefined }) => {
                 setStatus(e.target.value as "Pending" | "Live" | "Declined")
               }
             >
-              <option value="Pending">Pending</option>
-              <option value="Live">Live</option>
-              <option value="Declined">Declined</option>
+              <option value="Pending" className="text-black font-bold">Pending</option>
+              <option value="Live" className="text-black font-bold">Live</option>
+              <option value="Declined" className="text-black font-bold">Declined</option>
             </select>
             <br />
             <button
