@@ -5,7 +5,7 @@ import { Button, Input, Textarea } from '@nextui-org/react'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
-import {toast} from "sonner"
+import { toast } from "sonner"
 
 interface Props {
 
@@ -16,6 +16,7 @@ const Page = (props: Props) => {
     const { user } = useUser()
 
     const [loading, setLoading] = useState(false)
+    const [isSellerExist, setIsSellerExist] = useState(false)
 
     const [formData, setFormData] = useState({
         name: "",
@@ -56,13 +57,14 @@ const Page = (props: Props) => {
                     avatar: user?.imageUrl || "",
                 })
                 console.log("object")
-                toast.success("Shop created successfully",{
+                toast.success("Shop created successfully", {
                     className: "font-Monserrat text-green-500",
                 })
+                setIsSellerExist(true)
                 router.push('/')
             }).catch((error) => {
                 setLoading(false)
-                toast.error("You have already created a shop",{
+                toast.error("You have already created a shop", {
                     className: "font-Monserrat text-red-500",
                 })
                 console.log(error)
@@ -121,7 +123,7 @@ const Page = (props: Props) => {
                         <br />
                         <Button
                             className="mb-3 w-full bg-transparent h-[45px] border border-[#16c252] text-[#16c252] hover:bg-[#16c252] hover:text-black duration-300 transition-opacity font-Inter font-[600]"
-                            type="submit" disabled={loading}   disableAnimation={loading}
+                            type="submit" disabled={loading} disableAnimation={loading}
                         >
                             Create Shop
                         </Button>

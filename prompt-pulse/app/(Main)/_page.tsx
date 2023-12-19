@@ -1,4 +1,3 @@
-"use client"
 import Footer from '@/components/Layout/Footer'
 import Header from '@/components/Layout/Header'
 import PromptCard from '@/components/Prompts/PromptCard'
@@ -12,7 +11,7 @@ import { Divider } from '@nextui-org/react'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { User } from '@clerk/nextjs/server'
-import type {Shop} from '../../types'
+import type { Shop } from '../../types'
 
 
 type Props = {
@@ -23,14 +22,6 @@ type Props = {
 
 const RouterPage = ({ user, shopdata }: Props) => {
 
-  // console.log(user)
-  const [isSellerExist, setIsSellerExist] = useState(false)
-  useEffect(() => {
-    if (shopdata?.userId) {
-      setIsSellerExist(true)
-    }
-  }, [shopdata])
-  // console.log(isSellerExist)
   return (
     <>
       <div className="banner">
