@@ -7,6 +7,7 @@ export async function POST(req: NextRequest) {
   try {
     const data = await req.json();
     const user: User | null = await currentUser();
+    
 
     if (!data.images) {
       data.images = [];
