@@ -42,16 +42,7 @@ const RouterPage = ({ user, shopdata }: Props) => {
           <h1 className={`${styles.heading} p-2 font-Monserrat`}>
             Latest Prompts
           </h1>
-          <div className="w-full flex flex-wrap mt-5">
-            <PromptCard />
-            <PromptCard />
-            <PromptCard />
-            <PromptCard />
-            <PromptCard />
-            <PromptCard />
-            <PromptCard />
-            <PromptCard />
-          </div>
+          <PromptCard />
           <br />
           <BestSeller />
           <Future />
