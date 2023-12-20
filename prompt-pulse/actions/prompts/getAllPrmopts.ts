@@ -18,6 +18,7 @@ export const getAllPrompts = async (pageNumber = 1, pageSize = 8) => {
               orderBy: {
                 createdAt: "desc",
               },
+              distinct: ["id"],
         })
         return prompt
     } catch (error) {
