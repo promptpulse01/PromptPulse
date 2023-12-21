@@ -10,7 +10,6 @@ interface Props {
 const BestSeller = async (props: Props) => {
 
     const seller = JSON.parse(JSON.stringify(await getTopSeller()))
-    console.log(seller)
     return (
         <div className="mb-10 cursor-pointer">
             <h1 className={`${styles.heading} p-2 font-Monserrat mb-5`}>
