@@ -10,10 +10,11 @@ type Props = {
 const Page = async (props: Props) => {
     const data = JSON.parse(JSON.stringify(await getUser()));
     const shopdata = JSON.parse(JSON.stringify(await getShop()));
+    const promptdata = JSON.parse(JSON.stringify(await getAllPrompts()));
  
     return (
         <div>
-            <RouterPage user={data?.user} shopdata={shopdata}  />
+            <RouterPage user={data?.user} shopdata={shopdata} promptdata={promptdata} />
         </div>
     )
 }

@@ -9,7 +9,6 @@ import SellersBanner from '@/components/Shop/SellersBanner'
 import { styles } from '@/utils/styles'
 import { Divider } from '@nextui-org/react'
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
 import { User } from '@clerk/nextjs/server'
 import type { Shop } from '../../types'
 
@@ -17,10 +16,11 @@ import type { Shop } from '../../types'
 type Props = {
   user: User | undefined;
   shopdata: Shop | undefined;
+  promptdata: any
 
 }
 
-const RouterPage = ({ user, shopdata }: Props) => {
+const RouterPage = ({ user, shopdata,promptdata }: Props) => {
 
   return (
     <>
@@ -42,7 +42,7 @@ const RouterPage = ({ user, shopdata }: Props) => {
           <h1 className={`${styles.heading} p-2 font-Monserrat`}>
             Latest Prompts
           </h1>
-          <PromptCard />
+          <PromptCard promptdata={promptdata} />
           <br />
           <BestSeller />
           <Future />
