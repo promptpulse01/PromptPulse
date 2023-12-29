@@ -1,6 +1,6 @@
 import Footer from '@/components/Layout/Footer'
 import Header from '@/components/Layout/Header'
-import PromptCard from '@/components/Prompts/PromptCard'
+import PromptCardContainer from '@/components/Prompts/PromptCardContainer'
 import About from '@/components/Route/About'
 import Future from '@/components/Route/Future'
 import Hero from '@/components/Route/Hero'
@@ -42,7 +42,7 @@ const RouterPage = ({ user, shopdata,promptdata }: Props) => {
           <h1 className={`${styles.heading} p-2 font-Monserrat`}>
             Latest Prompts
           </h1>
-          <PromptCard promptdata={promptdata} />
+          <PromptCardContainer promptdata={promptdata} />
           <br />
           <BestSeller />
           <Future />

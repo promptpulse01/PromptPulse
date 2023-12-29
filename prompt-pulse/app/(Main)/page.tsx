@@ -11,10 +11,13 @@ const Page = async (props: Props) => {
     const data = JSON.parse(JSON.stringify(await getUser()));
     const shopdata = JSON.parse(JSON.stringify(await getShop()));
     const promptdata = JSON.parse(JSON.stringify(await getAllPrompts()));
+    // console.log(promptdata.prompts[0].images)
  
     return (
         <div>
-            <RouterPage user={data?.user} shopdata={shopdata} promptdata={promptdata} />
+            {
+               <RouterPage user={data?.user} shopdata={shopdata} promptdata={promptdata.prompts} />
+            }   
         </div>
     )
 }

@@ -4,7 +4,7 @@ import PromptCardDetails from "./PromptCardDetails"
 import PromptInformation from "./PromptInformation"
 import { useState } from "react";
 import PromptCardLoader from "@/utils/PromptCardLoader";
-import PromptCard from "../PromptCard";
+import PromptCardContainer from "../PromptCardContainer";
 import SellersBanner from "@/components/Shop/SellersBanner";
 
 const PromptDetails = ({ promptData, relatedPrompt }: any) => {
@@ -28,7 +28,7 @@ const PromptDetails = ({ promptData, relatedPrompt }: any) => {
         ))
       ) : (
         <>
-          <PromptCard promptdata={relatedPrompt} />
+          <PromptCardContainer promptdata={relatedPrompt} />
         </>
       )}
       <br />

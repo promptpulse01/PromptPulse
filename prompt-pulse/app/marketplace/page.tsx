@@ -1,11 +1,19 @@
 import React from 'react'
+import MarketPlace from './MarketPlace';
+import { getUser } from '@/actions/users/getUser';
 
-type Props = {}
 
-const page = (props: Props) => {
+const page = async() => {
+  const data = JSON.parse(JSON.stringify(await getUser()));
+
   return (
-    <div>page</div>
-  )
+    <div>
+      <MarketPlace
+        user={data?.user}
+        isSellerExist={data?.shop ? true : false}
+      />
+    </div>
+  );
 }
 
 export default page
