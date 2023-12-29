@@ -5,16 +5,10 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-type Props = {
-    promptdata: any
-}
 
-const PromptCard = async ({ promptdata }: Props) => {
-
-
-    return (
-        <div className="w-full flex flex-wrap mt-5">
-            {promptdata.map((item: any) => (
+const PromptCard = ({item}:any) => {
+  return (
+    <>
                 <Card key={item.id}
                     radius="lg"
                     className="w-full md:w-[31%] 2xl:w-[23%] max-h-[410px] p-4 bg-[#130f23] m-3"
@@ -68,9 +62,8 @@ const PromptCard = async ({ promptdata }: Props) => {
                         </div>
                     </Link>
                 </Card>
-            ))}
-        </div>
-    )
+    </>
+  )
 }
 
 export default PromptCard
