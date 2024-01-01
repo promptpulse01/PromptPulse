@@ -79,7 +79,26 @@ model Prompts {
   promptUrl        PromptFiles[]
   sellerId         String
   orders           Orders[]
+  cart            CartItem[]
   status           promptStatus  @default(Pending)
   createdAt        DateTime      @default(now())
   updatedAt        DateTime      @updatedAt
+}
+
+
+model Cart {
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId         String
+  payment_method String 
+  payment_id     String
+  items          CartItem[]
+  isPaid      Boolean   @default(false)
+}
+
+model CartItem {
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  cartId         String
+  promptId       String   @db.ObjectId
+  prompt         Prompts @relation(fields:[promptId], references:[id])
+  cart        Cart      @relation(fields: [cartId], references: [id])
 }

@@ -1,18 +1,23 @@
 import Ratings from '@/utils/Ratings';
 import { styles } from '@/utils/styles';
 import { Button, Chip } from '@nextui-org/react';
+import axios from 'axios';
 import Image from 'next/image';
 import React, { useState } from 'react'
 import Marquee from 'react-fast-marquee';
+import { User } from '@clerk/nextjs/server';
+import { currentUser } from '@clerk/nextjs';
 
 type Props = {
   promptData: any
+  user:any
 }
 
-const PromptCardDetails = ({ promptData }: Props) => {
+const PromptCardDetails = ({ promptData ,user}: Props) => {
 
   const [activeImage, setactiveImage] = useState(promptData?.images[0]?.url);
   const [open, setOpen] = useState(false)
+  const [cart, setCart] = useState()
 
   const percentageDifference = ((promptData?.estimatedPrice - promptData?.price) / promptData?.estimatedPrice) * 100;
 
@@ -21,6 +26,25 @@ const PromptCardDetails = ({ promptData }: Props) => {
   const tags = promptData?.tags;
 
   const tagsList = tags.split(",").map((tag: string) => tag.trim());
+
+
+
+  const addToCart = async () => {
+    try {
+      const userId = user?.id
+      const payment_method = "demo"
+      const payment_id="Demo"
+      const res = await axios.post('/api/cart', { promptData,userId ,payment_id,payment_method})
+      if (res) {
+        console.log(res.data)
+        setCart(res.data)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+
 
 
   return (
@@ -113,7 +137,8 @@ const PromptCardDetails = ({ promptData }: Props) => {
             </div>
             <br />
             <Button
-              onClick={() => setOpen(!open)}
+              // onClick={() => setOpen(!open)}
+              onClick={addToCart}
               radius="full"
               className={`${styles.button} h-[45px] font-[400] bg-[#64ff4b] !text-indigo-900 md:ml-2`}
             >
