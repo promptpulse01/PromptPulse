@@ -15,13 +15,18 @@ export async function POST(req: NextRequest) {
         })
         if(IsCartExist.length>0)
         {
+            let flag=false
             const prompts=IsCartExist[0].items
             prompts.map((item)=>{
-                if(item.id==promptData.id)
+                if(item.promptId==promptData.id)
                 {
-                    return NextResponse.json("Already Exist")
+                    flag=true
                 }
             })
+            if(flag)
+            {
+                return NextResponse.json({message:"Already in cart"})
+            }
             const newCart = await prisma.cart.update({
                 where: {
                     id: IsCartExist[0].id
