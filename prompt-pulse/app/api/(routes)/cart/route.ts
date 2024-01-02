@@ -3,11 +3,68 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
     try {
-        const data = await req.json();
-
-        const newCart = await prisma.cart.create({ data });
-
-        return NextResponse.json(newCart);
+        const { promptData, userId ,payment_method,payment_id} = await req.json();
+        const IsCartExist= await prisma.cart.findMany({
+            where: {
+                userId,
+                isPaid: false
+            },
+            include: {
+                items: true
+            }
+        })
+        if(IsCartExist.length>0)
+        {
+            const prompts=IsCartExist[0].items
+            prompts.map((item)=>{
+                if(item.id==promptData.id)
+                {
+                    return NextResponse.json("Already Exist")
+                }
+            })
+            const newCart = await prisma.cart.update({
+                where: {
+                    id: IsCartExist[0].id
+                },
+                data: {
+                    items: {
+                        create: {
+                            prompt:{
+                                connect:{
+                                    id:promptData.id
+                                }
+                            }
+                        }
+                    },
+                    payment_method: payment_method,
+                    payment_id: payment_id
+                },
+                include: {
+                    items: true
+                }
+            })
+            return NextResponse.json(newCart)
+        }
+            const newCart = await prisma.cart.create({
+                data: {
+                    userId,
+                    items: {
+                        create: {
+                            prompt:{
+                                connect:{
+                                    id:promptData.id
+                                }
+                            }
+                        }
+                    },
+                    payment_method: payment_method,
+                    payment_id: payment_id
+                },
+                include: {
+                    items: true
+                }
+            })
+            return NextResponse.json(newCart)
     } catch (error) {
         console.log("create shop error", error);
         return new NextResponse("Internal Error", { status: 500 });
