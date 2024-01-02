@@ -97,7 +97,7 @@ model Cart {
 
 model CartItem {
   id             String   @id @default(auto()) @map("_id") @db.ObjectId
-  cartId         String
+  cartId         String   @db.ObjectId
   promptId       String   @db.ObjectId
   prompt         Prompts @relation(fields:[promptId], references:[id])
   cart        Cart      @relation(fields: [cartId], references: [id])

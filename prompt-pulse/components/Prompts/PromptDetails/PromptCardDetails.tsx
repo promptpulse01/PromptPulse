@@ -5,9 +5,6 @@ import axios from 'axios';
 import Image from 'next/image';
 import React, { useState } from 'react'
 import Marquee from 'react-fast-marquee';
-import { User } from '@clerk/nextjs/server';
-import { currentUser } from '@clerk/nextjs';
-
 type Props = {
   promptData: any
   user:any
