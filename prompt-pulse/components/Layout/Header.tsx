@@ -9,6 +9,7 @@ import { User, currentUser } from '@clerk/nextjs/server';
 import Image from 'next/image'
 import { useClerk } from '@clerk/nextjs'
 import { useRouter } from 'next/navigation'
+import { FaShoppingCart } from "react-icons/fa";
 
 type Props = {
     activeItem: Number,
@@ -22,9 +23,9 @@ const Header = ({ activeItem, user }: Props) => {
     const [active, setactive] = useState(false);
     const [open, setOpen] = useState(false);
     const [activeProfile, setActiveProfile] = useState(false)
-    
 
-    
+
+
 
     if (typeof window !== "undefined") {
         window.addEventListener("scroll", () => {
@@ -56,6 +57,11 @@ const Header = ({ activeItem, user }: Props) => {
         await signOut()
         router.push("/sign-in");
     }
+
+const goToCart = ()=>{
+    router.push(`/cart/${user?.id}`)
+}
+
     return (
         <div className={`w-full p-5 border-b min-h-[60px] border-b-[#ffffff32] transition-opacity ${active && "fixed top-0 left-0 bg-[#000] z-[9999]"}`}>
             <div className="hidden md:w-[90%] mx-auto md:flex items-center justify-between">
@@ -68,7 +74,8 @@ const Header = ({ activeItem, user }: Props) => {
                     <Navigation />
                 </div>
                 <div className='flex items-center ml-10'>
-                    <AiOutlineSearch className="text-[25px] mr-5 cursor-pointer " />
+                    <AiOutlineSearch className="text-[25px] mr-5 cursor-pointer text-[#64FF4C] " />
+                    <FaShoppingCart  className="text-[25px] mr-5 cursor-pointer text-[#64FF4C] " onClick={goToCart}  />
                     {user ? (
                         <>
                             <Image
@@ -77,7 +84,7 @@ const Header = ({ activeItem, user }: Props) => {
                                 height={45}
                                 alt=''
                                 className='cursor-pointer rounded-full'
-                                onClick={()=>{
+                                onClick={() => {
                                     router.push(`/profile/${user?.id}`)
                                 }}
                             />
