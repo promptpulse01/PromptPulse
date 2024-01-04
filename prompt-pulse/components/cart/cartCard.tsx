@@ -20,7 +20,7 @@ const CartCard = ({ imageURL, name, price, id,secondaryid }:Props) => {
     }
     return (
         <>
-            <div className=" relative  flex bg-slate-900  h-[25%] w-[80%] pr-10 rounded-xl border-[#64FF4C] border-solid border-[3px] ">
+            <div className=" relative  flex bg-slate-900  h-[27vh] w-[80%] pr-10 rounded-xl  ">
                 <button className="absolute -top-4 -right-4 text-[#64FF4C] text-5xl hover:text-green-700" onClick={() => {handleDelete(secondaryid)}}>
                     <TiDelete />
                 </button>
