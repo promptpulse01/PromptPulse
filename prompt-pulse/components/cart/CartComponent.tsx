@@ -1,6 +1,7 @@
 "use client"
 import { Button } from "@nextui-org/react"
 import { useRouter } from "next/navigation"
+import CheckOut from "../checkout/Checkout"
 
 
 const CartComponent = ({ data }: any) => {
@@ -43,8 +44,7 @@ const CartComponent = ({ data }: any) => {
                 </div>
             </div>
             <div className="flex flex-col   justify-around items-center gap-5  mt-7">
-                <Button className={`bg-slate-900 text-[#ffeb3b] border-[#64FF4C] border-solid border-[1px] rounded-md text-lg w-[260px] h-[40px] font-semibold hover:text-gray-900 hover:bg-[#64FF4C]`}>CheckOut with Stripe</Button>
-
+                <CheckOut cart={data.cart} price={total}/>
                 <Button className={`bg-slate-900 text-[#ffeb3b] border-[#64FF4C] border-solid border-[1px] rounded-md text-lg w-[260px] h-[40px] font-semibold hover:text-gray-900 hover:bg-[#64FF4C]`} onClick={() => { router.push('/') }}>Continue Shopping</Button>
             </div>
         </div>

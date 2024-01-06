@@ -16,6 +16,7 @@
     "@mui/x-data-grid": "^6.18.5",
     "@nextui-org/react": "^2.2.9",
     "@prisma/client": "^5.7.0",
+    "@stripe/stripe-js": "^2.2.2",
     "axios": "^1.6.2",
     "cloudinary": "^1.41.0",
     "marquee": "^0.2.1",
@@ -25,6 +26,7 @@
     "react-fast-marquee": "^1.6.2",
     "react-icons": "^4.12.0",
     "sonner": "^1.2.4",
+    "stripe": "^14.11.0",
     "timeago.js": "^4.0.2"
   },
   "devDependencies": {
