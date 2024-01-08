@@ -6,6 +6,7 @@ import { styles } from "@/utils/styles";
 import { CgProfile } from "react-icons/cg";
 import { usePathname } from 'next/navigation';
 import { useParams } from 'next/navigation';
+import { TbMoneybag } from 'react-icons/tb';
 
 const sideBarItems = [
     {
@@ -17,7 +18,12 @@ const sideBarItems = [
         icon:<GoArrowSwitch/>,
         title: "Switch to Seller",
         href: `/switch-seller`,
-    }
+    },
+    {
+        icon: <TbMoneybag />,
+        title: "My Orders",
+        href: "/my-order",
+    },
   
 ];
 

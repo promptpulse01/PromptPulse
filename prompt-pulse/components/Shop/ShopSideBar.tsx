@@ -48,6 +48,11 @@ const sideBarItems = [
         title: "Withdraw Earnings",
         href: "/withdraw",
     },
+    {
+        icon: <TbMoneybag />,
+        title: "My Orders",
+        href: "/my-order",
+    },
   
 ];
 
