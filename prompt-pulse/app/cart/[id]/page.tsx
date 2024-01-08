@@ -35,7 +35,7 @@ const Page = async ({ params }: Props) => {
                         </>
                     ) : (
                         <div className="flex flex-col justify-start items-center  w-2/3   pt-10  bg-black gap-8 ">
-                            <h1 className=" font-bold text-[#64FF4C] tracking-wider text-center text-5xl ">
+                            <h1 className=" font-bold text-[#64FF4C] tracking-wider text-center text-2xl ">
                                 Your cart is currently empty. Please browse our selection and add items to proceed to checkout
                             </h1>
                             <Button className={`bg-slate-900 text-[#ffeb3b] border-[#64FF4C] border-solid border-[1px] rounded-md text-lg w-[260px] h-[40px] font-semibold hover:text-gray-900 hover:bg-[#64FF4C]`} ><Link href={"/"}>Continue Shopping</Link></Button>
