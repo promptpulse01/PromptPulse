@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
             })
             if(flag)
             {
-                return NextResponse.json({message:"Already in cart"})
+                return NextResponse.json({message:"Item is already in cart"})
             }
             const newCart = await prisma.cart.update({
                 where: {
@@ -48,7 +48,7 @@ export async function POST(req: NextRequest) {
                     items: true
                 }
             })
-            return NextResponse.json(newCart)
+            return NextResponse.json({message:"Item added to cart"})
         }
             const newCart = await prisma.cart.create({
                 data: {
@@ -69,7 +69,7 @@ export async function POST(req: NextRequest) {
                     items: true
                 }
             })
-            return NextResponse.json(newCart)
+            return NextResponse.json({message: "Item added to cart"})
     } catch (error) {
         console.log("create shop error", error);
         return new NextResponse("Internal Error", { status: 500 });

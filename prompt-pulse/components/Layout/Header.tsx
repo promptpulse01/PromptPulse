@@ -5,9 +5,8 @@ import Navigation from './Navigation'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { CgProfile } from 'react-icons/cg'
 import { FaBars } from 'react-icons/fa'
-import { User, currentUser } from '@clerk/nextjs/server';
+import { User } from '@clerk/nextjs/server';
 import Image from 'next/image'
-import { useClerk } from '@clerk/nextjs'
 import { useRouter } from 'next/navigation'
 import { FaShoppingCart } from "react-icons/fa";
 
@@ -22,10 +21,6 @@ const Header = ({ activeItem, user }: Props) => {
 
     const [active, setactive] = useState(false);
     const [open, setOpen] = useState(false);
-    const [activeProfile, setActiveProfile] = useState(false)
-
-
-
 
     if (typeof window !== "undefined") {
         window.addEventListener("scroll", () => {
@@ -43,20 +38,7 @@ const Header = ({ activeItem, user }: Props) => {
             setOpen(!open);
         }
     };
-
-
-    const handleProfile = () => {
-        setActiveProfile(!activeProfile)
-    }
-
-    const { signOut } = useClerk();
     const router = useRouter()
-
-
-    const handlelogout = async () => {
-        await signOut()
-        router.push("/sign-in");
-    }
 
 const goToCart = ()=>{
     router.push(`/cart/${user?.id}`)

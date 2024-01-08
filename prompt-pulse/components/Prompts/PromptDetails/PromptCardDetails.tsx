@@ -5,6 +5,7 @@ import axios from 'axios';
 import Image from 'next/image';
 import React, { useState } from 'react'
 import Marquee from 'react-fast-marquee';
+import { toast } from 'sonner';
 type Props = {
   promptData: any
   user:any
@@ -13,8 +14,6 @@ type Props = {
 const PromptCardDetails = ({ promptData ,user}: Props) => {
 
   const [activeImage, setactiveImage] = useState(promptData?.images[0]?.url);
-  const [open, setOpen] = useState(false)
-  const [cart, setCart] = useState()
 
   const percentageDifference = ((promptData?.estimatedPrice - promptData?.price) / promptData?.estimatedPrice) * 100;
 
@@ -32,10 +31,16 @@ const PromptCardDetails = ({ promptData ,user}: Props) => {
       const payment_method = "demo"
       const payment_id="Demo"
       const res = await axios.post('/api/cart', { promptData,userId ,payment_id,payment_method})
-      if (res) {
-        console.log(res.data)
-        setCart(res.data)
+      if (res.data.message === "Item added to cart") {
+        toast.success("Item added to cart")
       }
+      else if (res.data.message === "Item is already in cart") {
+        toast.error("Item is already in cart")
+      }
+      else{
+        toast.error("Something went wrong")
+      }
+      
     } catch (error) {
       console.log(error)
     }
