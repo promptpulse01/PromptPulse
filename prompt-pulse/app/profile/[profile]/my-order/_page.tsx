@@ -103,9 +103,9 @@ const MyOrder = ({ order, user }: Props) => {
 
       {order.length === 0 ? (
         <>
-            <h1 className=" font-bold text-[#64FF4C] tracking-wider text-center text-5xl mt-10 ">
-              Empty Order
-            </h1>
+          <h1 className=" font-bold text-white tracking-wider text-center text-3xl mt-12 ">
+            Your order is currently empty. Explore our amazing prompts and fill it with joy!
+          </h1>
         </>
       ) : (
         <>
