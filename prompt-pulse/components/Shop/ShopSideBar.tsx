@@ -35,8 +35,8 @@ const sideBarItems = [
     },
     {
         icon: <TbMoneybag />,
-        title: "Orders",
-        href: "/orders",
+        title: "Shop Orders",
+        href: "/shop-order",
     },
     {
         icon: <LiaFileInvoiceDollarSolid />,
