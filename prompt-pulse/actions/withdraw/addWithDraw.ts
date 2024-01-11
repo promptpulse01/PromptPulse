@@ -11,8 +11,7 @@ export const addWithdraw = async ({ sellerId, amount }: Props) => {
     const respose = await prisma.withdraws.create({
       data: {
         sellerId,
-        amount,
-        status: "Pending",
+        amount
       },
     });
 
