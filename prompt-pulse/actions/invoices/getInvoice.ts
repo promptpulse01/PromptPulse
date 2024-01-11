@@ -6,7 +6,7 @@ export const getInvoice = async ( { sellerId }: { sellerId: string } ) => {
   try {
     const invoices = await prisma.withdraws.findMany({
       where: {
-        sellerId,
+        sellerId:sellerId
       },
       orderBy: {
         createdAt: "desc",
