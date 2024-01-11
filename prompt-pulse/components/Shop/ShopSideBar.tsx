@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import { GoHome } from "react-icons/go";
+import { GoArrowSwitch, GoHome } from "react-icons/go";
 import { BsWallet2 } from "react-icons/bs";
 import { LiaFileInvoiceDollarSolid } from "react-icons/lia";
 import { TbMoneybag } from "react-icons/tb";
