@@ -88,9 +88,7 @@ const WithDraw = ({ shop, orders, invoices }: Props) => {
         : 0;
 
     const totalEarning = totalOrderAmount - totalInvoiceAmount;
-    // console.log(totalOrderAmount)
-    // console.log(totalInvoiceAmount)
-    // console.log(totalEarning)
+
 
 
     const handleWithdraw = async () => {
@@ -112,7 +110,7 @@ const WithDraw = ({ shop, orders, invoices }: Props) => {
                     <div className="flex flex-col items-center justify-center min-h-screen">
                         <div className="flex flex-col items-center justify-center">
                             <div className="flex items-center justify-center">
-                                <h1 className="text-3xl font-semibold">Just a moment, please! We're putting the finishing touches on your order.</h1>
+                                <h1 className="text-3xl font-semibold">Looks like you're a little short for this withdrawal.</h1>
                             </div>
                         </div>
                     </div>
