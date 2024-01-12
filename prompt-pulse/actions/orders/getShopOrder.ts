@@ -1,7 +1,7 @@
 import prisma from "@/lib/prismaDb";
 import { clerkClient } from "@clerk/nextjs";
 
-export const getShopOrders = async ( sellerId : string ) => {
+export const getShopOrders = async ( {sellerId} : {sellerId:string} ) => {
   try {
     const orders: any = await prisma.orders.findMany({
       where: {

@@ -7,7 +7,7 @@ const Page = async (props: Props) => {
   const data = JSON.parse(JSON.stringify(await getPrompts()));
   return (
     <>
-        <UserPrompts data={data} />
+        <UserPrompts promptsData={data} isDashboard={false}/>
     </>
   );
 };
