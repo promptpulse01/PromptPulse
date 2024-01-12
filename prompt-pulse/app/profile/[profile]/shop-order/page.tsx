@@ -9,7 +9,7 @@ const Page = async(props: Props) => {
 
     const {shop}= JSON.parse(JSON.stringify(await getUser()))
     const sellerId = shop?.userId
-    const ordersData = JSON.parse(JSON.stringify(await getShopOrders(sellerId)))
+    const ordersData = JSON.parse(JSON.stringify(await getShopOrders({sellerId:sellerId})))
 
   return (
     <>

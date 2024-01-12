@@ -1,6 +1,6 @@
 "use client";
 import { DataGrid } from "@mui/x-data-grid";
-import { Box} from "@mui/material";
+import { Box } from "@mui/material";
 
 type PromptsDataTypes = {
   id: string;
@@ -9,10 +9,16 @@ type PromptsDataTypes = {
   rating: number;
   purchased?: number;
   orders?: any[];
-  status?: string;
+  status: string;
 };
 
-const UserPrompts = ({ data }: { data: any[] | undefined }) => {
+const AllPrompts = ({
+  promptsData,
+  isDashboard,
+}: {
+  promptsData: any;
+  isDashboard?: boolean;
+}) => {
   const columns = [
     { field: "id", headerName: "ID", flex: 0.5 },
     { field: "name", headerName: "Prompts Title", flex: 0.8 },
@@ -28,24 +34,23 @@ const UserPrompts = ({ data }: { data: any[] | undefined }) => {
 
   const rows: Array<PromptsDataTypes> = [];
 
-  data &&
-    data.map((prompt) =>
-      rows.push({
-        id: prompt.id,
-        name: prompt.name,
-        price: prompt.price,
-        rating: prompt.rating,
-        purchased: prompt?.orders?.length,
-        status: prompt.status,
-      })
-    );
+  promptsData?.forEach((item: PromptsDataTypes) => {
+    rows.push({
+      id: item.id,
+      name: item.name,
+      price: "$US" + item.price,
+      rating: item.rating,
+      purchased: item.orders?.length,
+      status: item.status,
+    });
+  });
 
   return (
     <>
       <Box m="20px">
         <Box
           m="40px 0 0 0"
-          height="90vh"
+          height={isDashboard ? "35vh" : "90vh"}
           sx={{
             "& .MuiDataGrid-root": {
               border: "none",
@@ -94,9 +99,8 @@ const UserPrompts = ({ data }: { data: any[] | undefined }) => {
           <DataGrid checkboxSelection rows={rows} columns={columns} />
         </Box>
       </Box>
-
     </>
   );
 };
 
-export default UserPrompts;
+export default AllPrompts;

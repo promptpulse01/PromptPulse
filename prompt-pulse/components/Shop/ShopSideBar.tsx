@@ -21,7 +21,7 @@ const sideBarItems = [
     {
         icon: <GoHome />,
         title: "Dashboard",
-        href: "/my-shop",
+        href: "/dashboard",
     },
     {
         icon: <MdOutlineCreateNewFolder />,

@@ -13,6 +13,9 @@ export const getPrompts = async () => {
         const prompt = await prisma.prompts.findMany({
             where: {
                 sellerId: user.id
+            },
+            include:{
+                orders:true,
             }
         })
         return  prompt
