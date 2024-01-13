@@ -49,8 +49,10 @@ const AllPrompts = ({
     <>
       <Box m="20px">
         <Box
-          m="40px 0 0 0"
-          height={isDashboard ? "35vh" : "90vh"}
+          m={`${!isDashboard && "40px 0 0 0"}`}
+          height={isDashboard ? "38vh" : "90vh"}
+          border={"2px solid #5432D3!important "}
+          borderRadius={"12px"}
           sx={{
             "& .MuiDataGrid-root": {
               border: "none",
@@ -64,7 +66,7 @@ const AllPrompts = ({
             },
             "& .MuiDataGrid-row": {
               color: "#fff",
-              borderBottom: "1px solid #5432D3!important",
+              borderBottom: "2px solid #5432D3!important",
             },
             "& .MuiTablePagination-root": {
               color: "#fff",

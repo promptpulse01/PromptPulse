@@ -4,7 +4,13 @@ import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { AiOutlineMail } from "react-icons/ai";
 import { format } from "timeago.js";
 
-const ShopAllOrders = ({ isDashboard,ordersData }: { isDashboard: boolean,ordersData:any}) => {
+const ShopAllOrders = ({
+  isDashboard,
+  ordersData,
+}: {
+  isDashboard: boolean;
+  ordersData: any;
+}) => {
   const columns = [
     { field: "id", headerName: "ID", flex: 0.3 },
     { field: "name", headerName: "Name", flex: isDashboard ? 0.6 : 0.5 },
@@ -38,19 +44,24 @@ const ShopAllOrders = ({ isDashboard,ordersData }: { isDashboard: boolean,orders
 
   const rows: any = [];
 
-  ordersData && ordersData.forEach((order:any) => {
-    rows.push({
+  ordersData &&
+    ordersData.forEach((order: any) => {
+      rows.push({
         id: order.id,
         name: order?.user?.firstName + " " + order?.user?.lastName,
         email: order?.user?.emailAddresses[0]?.emailAddress,
         title: order?.prompt?.name,
         price: "US $" + order?.prompt.price,
         created_at: format(order?.createdAt),
-    })
-  })
+      });
+    });
 
   return (
-    <Box m={`${!isDashboard && "20px"}`}>
+    <Box
+      m={`${!isDashboard && "20px"}`}
+      border={"2px solid #5432D3!important "}
+      borderRadius={"12px"}
+    >
       <Box
         m={`${!isDashboard && "40px 0 0 0"}`}
         height={isDashboard ? "38vh" : "90vh"}
@@ -67,7 +78,7 @@ const ShopAllOrders = ({ isDashboard,ordersData }: { isDashboard: boolean,orders
           },
           "& .MuiDataGrid-row": {
             color: "#fff",
-            borderBottom: "1px solid #ffffff30!important",
+            borderBottom: "2px solid #5432D3!important",
           },
           "& .MuiTablePagination-root": {
             color: "#fff",
@@ -79,17 +90,17 @@ const ShopAllOrders = ({ isDashboard,ordersData }: { isDashboard: boolean,orders
             color: "#fff",
           },
           "& .MuiDataGrid-columnHeaders": {
-            backgroundColor: "#3e4396",
+            backgroundColor: "#5432D3",
             borderBottom: "none",
             color: "#fff",
           },
           "& .MuiDataGrid-virtualScroller": {
-            backgroundColor: "#1F2A40",
+            backgroundColor: "#141829",
           },
           "& .MuiDataGrid-footerContainer": {
             color: "dark",
             borderTop: "none",
-            backgroundColor: "#3e4396",
+            backgroundColor: "#5432D3",
           },
           "& .MuiCheckbox-root": {
             color: `#b7ebde !important`,
