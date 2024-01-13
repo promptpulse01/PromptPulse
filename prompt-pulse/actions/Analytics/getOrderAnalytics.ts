@@ -1,6 +1,7 @@
 "use server";
 
 import prisma from "@/lib/prismaDb";
+import { getUser } from "../users/getUser";
 
 interface MonthData {
   month: string;
@@ -13,6 +14,8 @@ export async function generateLast12MonthsOrderData(): Promise<{
   const last12Months: MonthData[] = [];
   const currentDate = new Date();
   currentDate.setDate(currentDate.getDate() + 1);
+
+  const { user } = JSON.parse(JSON.stringify(await getUser()));
 
   for (let i = 11; i >= 0; i--) {
     const endDate = new Date(
@@ -32,7 +35,13 @@ export async function generateLast12MonthsOrderData(): Promise<{
       year: "numeric",
     });
 
-    const allOrders = await prisma.orders.findMany();
+    const allOrders = await prisma.orders.findMany({
+      where: {
+        prompt: {
+          sellerId: user.id,
+        },
+      },
+    });
 
     const orders = allOrders.filter((order) => {
       const createdAt = new Date(order.createdAt);

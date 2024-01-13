@@ -64,7 +64,7 @@ const AllPrompts = ({
             },
             "& .MuiDataGrid-row": {
               color: "#fff",
-              borderBottom: "1px solid #ffffff30!important",
+              borderBottom: "1px solid #5432D3!important",
             },
             "& .MuiTablePagination-root": {
               color: "#fff",
@@ -76,17 +76,17 @@ const AllPrompts = ({
               color: "#fff",
             },
             "& .MuiDataGrid-columnHeaders": {
-              backgroundColor: "#3e4396",
+              backgroundColor: "#5432D3",
               borderBottom: "none",
               color: "#fff",
             },
             "& .MuiDataGrid-virtualScroller": {
-              backgroundColor: "#1F2A40",
+              backgroundColor: "#141829",
             },
             "& .MuiDataGrid-footerContainer": {
               color: "dark",
               borderTop: "none",
-              backgroundColor: "#3e4396",
+              backgroundColor: "#5432D3",
             },
             "& .MuiCheckbox-root": {
               color: `#b7ebde !important`,

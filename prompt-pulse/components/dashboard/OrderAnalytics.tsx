@@ -34,14 +34,15 @@ const OrderAnalytics = ({ isDashboard }: Props) => {
 
   return (
     <>
+      {/* bg-[#111C43] */}
       <div
         className={`${
           !isDashboard
             ? "mt-[50px]"
-            : "mt-[50px] bg-[#111C43] shadow-sm pb-5 rounded-sm"
+            : "mt-[50px] bg-[#111C43] text-[#858DFB] shadow-sm pb-5  "
         }`}
       >
-        <div className={`${isDashboard ? "!ml-8 mb-5" : ""}`}>
+        <div className={`${isDashboard ? "!ml-8 mb-5 " : ""}`}>
           <h1
             className={`${styles.label} ${
               isDashboard && "!text-[20px]"
@@ -59,9 +60,9 @@ const OrderAnalytics = ({ isDashboard }: Props) => {
         <div
           className={`w-full ${
             isDashboard ? "h-[30vh]" : "h-screen"
-          } flex items-center justify-center`}
+          } flex items-center justify-center rounded-xl`}
         >
-           {data ? (
+          {data ? (
             <>
               <ResponsiveContainer
                 width={isDashboard ? "100%" : "90%"}
