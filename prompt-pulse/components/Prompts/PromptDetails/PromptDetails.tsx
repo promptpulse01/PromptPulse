@@ -7,14 +7,14 @@ import PromptCardLoader from "@/utils/PromptCardLoader";
 import PromptCardContainer from "../PromptCardContainer";
 import SellersBanner from "@/components/Shop/SellersBanner";
 
-const PromptDetails = ({ promptData, relatedPrompt,user }: any) => {
+const PromptDetails = ({ promptData, relatedPrompt,user,isbought }: any) => {
 
   const [loading, setLoading] = useState(false);
 
 
   return (
     <div >
-      <PromptCardDetails promptData={promptData} user={user}  />
+      <PromptCardDetails promptData={promptData} user={user} isbought={isbought} />
       <br />
       <br />
       <PromptInformation promptData={promptData} />
