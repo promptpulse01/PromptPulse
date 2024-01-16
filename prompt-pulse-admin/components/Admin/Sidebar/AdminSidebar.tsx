@@ -62,7 +62,7 @@ const Sidebar = ({ user }: any) => {
     await signOut();
   };
   let param=useSelectedLayoutSegment() || 'dashboard';
-  console.log(param)
+  // console.log(param)
   return (
     <Box
       sx={{
@@ -170,7 +170,7 @@ const Sidebar = ({ user }: any) => {
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
             <Item
               title="Dashboard"
-              to="/"
+              to="/dashboard"
               icon={<HomeOutlinedIcon />}
               selected={param}
               setSelected={param}
@@ -202,13 +202,6 @@ const Sidebar = ({ user }: any) => {
               title="All Prompts"
               to="/prompts"
               icon={<MapOutlinedIcon />}
-              selected={param}
-              setSelected={param}
-            />
-            <Item
-              title="Withdraw requests"
-              to="/withdraw-requests"
-              icon={<ManageHistoryIcon />}
               selected={param}
               setSelected={param}
             />
