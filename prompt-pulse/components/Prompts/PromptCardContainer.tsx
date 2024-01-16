@@ -5,7 +5,7 @@ type Props = {
     promptdata: any
 }
 
-const PromptCardContainer = async ({ promptdata }: Props) => {
+const PromptCardContainer = ({ promptdata }: Props) => {
     return (
         <div className="w-full flex flex-wrap mt-5">
             {promptdata.map((item: any) => (

@@ -64,48 +64,48 @@ const ShopOrder = ({ orderdata, isDashboard }: Props) => {
                     height={isDashboard ? "38vh" : "90vh"}
                     sx={{
                         "& .MuiDataGrid-root": {
-                            border: "none",
-                            outline: "none",
+                          border: "none",
+                          outline: "none",
                         },
                         "& .css-pqjvzy-MuiSvgIcon-root-MuiSelect-icon": {
-                            color: "#fff",
+                          color: "#fff",
                         },
                         "& .MuiDataGrid-sortIcon": {
-                            color: "#fff",
+                          color: "#fff",
                         },
                         "& .MuiDataGrid-row": {
-                            color: "#fff",
-                            borderBottom: "1px solid #ffffff30!important",
+                          color: "#fff",
+                          borderBottom: "2px solid #5432D3!important",
                         },
                         "& .MuiTablePagination-root": {
-                            color: "#fff",
+                          color: "#fff",
                         },
                         "& .MuiDataGrid-cell": {
-                            borderBottom: "none!important",
+                          borderBottom: "none!important",
                         },
                         "& .name-column--cell": {
-                            color: "#fff",
+                          color: "#fff",
                         },
                         "& .MuiDataGrid-columnHeaders": {
-                            backgroundColor: "#3e4396",
-                            borderBottom: "none",
-                            color: "#fff",
+                          backgroundColor: "#5432D3",
+                          borderBottom: "none",
+                          color: "#fff",
                         },
                         "& .MuiDataGrid-virtualScroller": {
-                            backgroundColor: "#1F2A40",
+                          backgroundColor: "#141829",
                         },
                         "& .MuiDataGrid-footerContainer": {
-                            color: "dark",
-                            borderTop: "none",
-                            backgroundColor: "#3e4396",
+                          color: "dark",
+                          borderTop: "none",
+                          backgroundColor: "#5432D3",
                         },
                         "& .MuiCheckbox-root": {
-                            color: `#b7ebde !important`,
+                          color: `#b7ebde !important`,
                         },
                         "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
-                            color: `#fff !important`,
+                          color: `#fff !important`,
                         },
-                    }}
+                      }}
                 >
                     <DataGrid
                         checkboxSelection={isDashboard ? false : true}

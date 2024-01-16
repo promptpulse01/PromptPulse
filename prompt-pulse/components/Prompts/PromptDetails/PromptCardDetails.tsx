@@ -3,15 +3,17 @@ import { styles } from '@/utils/styles';
 import { Button, Chip } from '@nextui-org/react';
 import axios from 'axios';
 import Image from 'next/image';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Marquee from 'react-fast-marquee';
 import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 type Props = {
   promptData: any
-  user:any
+  user: any,
+  isbought:boolean
 }
 
-const PromptCardDetails = ({ promptData ,user}: Props) => {
+const PromptCardDetails = ({ promptData, user,isbought }: Props) => {
 
   const [activeImage, setactiveImage] = useState(promptData?.images[0]?.url);
 
@@ -22,6 +24,7 @@ const PromptCardDetails = ({ promptData ,user}: Props) => {
   const tags = promptData?.tags;
 
   const tagsList = tags.split(",").map((tag: string) => tag.trim());
+  const router=useRouter()
 
 
 
@@ -29,25 +32,25 @@ const PromptCardDetails = ({ promptData ,user}: Props) => {
     try {
       const userId = user?.id
       const payment_method = "demo"
-      const payment_id="Demo"
-      const res = await axios.post('/api/cart', { promptData,userId ,payment_id,payment_method})
+      const payment_id = "Demo"
+      const res = await axios.post('/api/cart', { promptData, userId, payment_id, payment_method })
       if (res.data.message === "Item added to cart") {
         toast.success("Item added to cart")
       }
       else if (res.data.message === "Item is already in cart") {
         toast.error("Item is already in cart")
       }
-      else{
+      else {
         toast.error("Something went wrong")
       }
-      
+
     } catch (error) {
       console.log(error)
     }
   }
-
-
-
+  const handlePurchased = async()=>{
+    router.push(`/profile/${user?.id}/my-order`)
+  }
 
   return (
     <div className="bg-[#1211023] p-3 w-full min-h-[50vh] shadow rounded-xl mt-8">
@@ -138,14 +141,26 @@ const PromptCardDetails = ({ promptData ,user}: Props) => {
               ))}
             </div>
             <br />
-            <Button
-              // onClick={() => setOpen(!open)}
-              onClick={addToCart}
+            {isbought ? (
+              <Button
+              onClick={handlePurchased}
               radius="full"
               className={`${styles.button} h-[45px] font-[400] bg-[#64ff4b] !text-indigo-900 md:ml-2`}
             >
-              Buy now ${promptData?.price}
+              Purchased
             </Button>
+            ) :
+              (
+                <Button
+                  // onClick={() => setOpen(!open)}
+                  onClick={addToCart}
+                  radius="full"
+                  className={`${styles.button} h-[45px] font-[400] bg-[#64ff4b] !text-indigo-900 md:ml-2`}
+                >
+                  Buy now ${promptData?.price}
+                </Button>
+              )
+            }
           </div>
         </div>
       </div>

@@ -23,7 +23,7 @@ const DashBoard = ({
     <div>
       <div className="mt-[5px] min-h-screen">
         <h1 className=" text-center font-bold text-4xl pt-5 uppercase">
-          DESABOARD
+          DASHBOARD
         </h1>
         <div className="grid grid-cols-[75%,25%] ">
           <div className="px-8">

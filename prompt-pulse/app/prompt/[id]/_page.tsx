@@ -10,10 +10,11 @@ type Props = {
   user: User | undefined,
   isSellerExist: boolean,
   prompt: any,
-  relatedPrompt: any
+  relatedPrompt: any,
+  isbought: boolean
 }
 
-const PromptDetailsPage = ({ user, isSellerExist, prompt, relatedPrompt }: Props) => {
+const PromptDetailsPage = ({ user, isSellerExist, prompt, relatedPrompt, isbought }: Props) => {
 
   // console.log(prompt)
   return (
@@ -29,6 +30,7 @@ const PromptDetailsPage = ({ user, isSellerExist, prompt, relatedPrompt }: Props
               user={user}
               promptData={prompt}
               relatedPrompt={relatedPrompt}
+              isbought={isbought}
             />
             <Divider className="bg-[#ffffff14] mt-5" />
             <Footer />
