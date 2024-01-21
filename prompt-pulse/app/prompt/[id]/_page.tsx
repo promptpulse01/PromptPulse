@@ -15,13 +15,10 @@ type Props = {
 }
 
 const PromptDetailsPage = ({ user, isSellerExist, prompt, relatedPrompt, isbought }: Props) => {
-
-  // console.log(prompt)
   return (
     <>
       <div>
         <div className="shop-banner">
-          <Header activeItem={2} user={user} />
           <ShopBanner title={prompt?.name} />
         </div>
         <div>
@@ -33,7 +30,6 @@ const PromptDetailsPage = ({ user, isSellerExist, prompt, relatedPrompt, isbough
               isbought={isbought}
             />
             <Divider className="bg-[#ffffff14] mt-5" />
-            <Footer />
           </div>
         </div>
       </div>

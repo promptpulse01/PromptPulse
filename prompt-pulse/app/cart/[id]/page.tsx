@@ -14,11 +14,8 @@ type Props = {
 const Page = async ({ params }: Props) => {
 
     const data = JSON.parse(JSON.stringify(await getCartById(params.id)))
-
-    const { user } = JSON.parse(JSON.stringify(await getUser()))
     return (
         <>
-            <Header activeItem={1} user={user} />
             <div className="flex flex-col   w-full  min-h-screen bg-black  gap-10  py-10">
                 <h1 className=" font-bold text-[#64FF4C] tracking-wider text-center text-5xl ">
                     Cart Page

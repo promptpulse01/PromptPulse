@@ -26,12 +26,32 @@ const PromptCard = ({item}:any) => {
                         <div className="absolute bottom-2 left-2">
                             <div className="w-max bg-black hover:bg-[#16252] duration-300 transition-opacity hover:text-black text-white p-[10px] items-center flex rounded-xl">
 
-                                <Image
+                                {item?.category=="Chatgpt" && <Image
                                     src="https://pixner.net/aikeu/assets/images/category/chat.png"
                                     width={25}
                                     height={25}
                                     alt=""
-                                />
+                                />}
+                                {item?.category=="Midjourney" && <Image
+                                    src="https://pixner.net/aikeu/assets/images/category/mid.png"
+                                    width={25}
+                                    height={25}
+                                    alt=""
+                                />}
+                                {item?.category=="Bard" && <Image
+                                    src=" https://upload.wikimedia.org/wikipedia/commons/f/f0/Google_Bard_logo.svg"
+                                    width={25}
+                                    height={25}
+                                    alt=""
+                                />}
+                                {item?.category=="Dalle" && <Image
+                                    src=" https://lirp.cdn-website.com/df735c7c/dms3rep/multi/opt/MicrosoftTeams-image+%28123%29-640w.png"
+                                    width={25}
+                                    height={25}
+                                    alt=""
+                                />}
+                                
+                               
 
                                 <span className={`${styles.label} pl-2 text-white`}>
                                     {item?.category}
