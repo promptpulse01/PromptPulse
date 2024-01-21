@@ -99,7 +99,6 @@ const MyOrder = ({ order, user }: Props) => {
 
   return (
     <>
-      <Header activeItem={9} user={user} />
 
       {order.length === 0 ? (
         <>

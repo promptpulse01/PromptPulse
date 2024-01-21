@@ -25,7 +25,6 @@ const RouterPage = ({ user, shopdata,promptdata }: Props) => {
   return (
     <>
       <div className="banner">
-        <Header activeItem={0} user={user} />
         <Hero />
       </div>
       <Image
@@ -52,7 +51,7 @@ const RouterPage = ({ user, shopdata,promptdata }: Props) => {
           <br />
           <br />
           <Divider className="bg-[#ffffff23]" />
-          <Footer />
+          
         </div>
       </div>
     </>
