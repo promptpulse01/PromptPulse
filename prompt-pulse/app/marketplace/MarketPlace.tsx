@@ -64,7 +64,6 @@ const MarketPlace = ({
   return (
     <>
       <div className="shop-banner">
-        <Header activeItem={2} user={user}/>
         <ShopBanner title="Our Shop" />
       </div>
       <div>

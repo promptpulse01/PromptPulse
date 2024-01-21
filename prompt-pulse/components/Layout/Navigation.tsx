@@ -1,6 +1,7 @@
 "use client"
 
 import { usePathname } from "next/navigation"
+import Link from "next/link"
 
 interface Props {
     activeItem: Number
@@ -31,17 +32,19 @@ const navItems = [
 
 const Navigation = () => {
     const pathname = usePathname()
+    console.log(pathname)
     return (
         <div className='block md:flex'>
             {
-                navItems.map((items, index) => (
+                navItems.map((items) => (
                     <div key={items.name}>
-                        <h5
+                        <Link
+                            href={items.link}
                             className={`inline-block md:px-4 xl:px-8 py-5 md:py-0 text-[18px] font-[500] font-Inter ${pathname === items.link && "text-[#6dff4b]"
                                 } cursor-pointer`}
                         >
                             {items.name}
-                        </h5>
+                        </Link>
                     </div>
                 ))
             }
