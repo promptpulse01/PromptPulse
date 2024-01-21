@@ -107,7 +107,6 @@ const MarketPlace = ({
               )}
             </div>
             <Divider className="bg-[#ffffff14] mt-5" />
-            <Footer />
           </div>
         </div>
       </div>

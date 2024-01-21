@@ -32,7 +32,6 @@ const navItems = [
 
 const Navigation = () => {
     const pathname = usePathname()
-    console.log(pathname)
     return (
         <div className='block md:flex'>
             {
