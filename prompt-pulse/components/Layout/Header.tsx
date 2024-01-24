@@ -40,9 +40,9 @@ const Header = ({ activeItem, user }: Props) => {
     };
     const router = useRouter()
 
-const goToCart = ()=>{
-    router.push(`/cart/${user?.id}`)
-}
+    const goToCart = () => {
+        router.push(`/cart/${user?.id}`)
+    }
 
     return (
         <div className={`w-full p-5 border-b min-h-[60px] border-b-[#ffffff32] transition-opacity ${active && "fixed top-0 left-0 bg-[#000] z-[9999]"}`}>
@@ -57,8 +57,8 @@ const goToCart = ()=>{
                 </div>
                 <div className='flex items-center ml-10'>
                     <AiOutlineSearch className="text-[25px] mr-5 cursor-pointer text-[#64FF4C] " />
-                    <FaShoppingCart  className="text-[25px] mr-5 cursor-pointer text-[#64FF4C] " onClick={goToCart} />
-                    {user ? (
+                    <FaShoppingCart className="text-[25px] mr-5 cursor-pointer text-[#64FF4C] " onClick={goToCart} />
+                    {user? (
                         <>
                             <Image
                                 src={user?.imageUrl}

@@ -20,13 +20,13 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const { user } = JSON.parse(JSON.stringify(await getUser()))
+  const  data  = JSON.parse(JSON.stringify(await getUser()))
   return (
     <ClerkProvider>
-     <html lang="en">
+      <html lang="en">
         <body className={inter.className}>
-          <Toaster position='top-center' richColors/>
-          <Header activeItem={0} user={user} />
+          <Toaster position='top-center' richColors />
+          <Header activeItem={0} user={data.user}  />
           {children}
           <Footer />
         </body>
