@@ -19,8 +19,10 @@
     "@stripe/stripe-js": "^2.2.2",
     "axios": "^1.6.2",
     "cloudinary": "^1.41.0",
+    "lucide-react": "^0.316.0",
     "marquee": "^0.2.1",
     "next": "14.0.3",
+    "openai": "^4.26.0",
     "react": "^18",
     "react-dom": "^18",
     "react-fast-marquee": "^1.6.2",
@@ -28,7 +30,8 @@
     "recharts": "^2.10.4",
     "sonner": "^1.2.4",
     "stripe": "^14.11.0",
-    "timeago.js": "^4.0.2"
+    "timeago.js": "^4.0.2",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@types/node": "^20",
