@@ -1,20 +1,17 @@
-"use client"
-import axios from 'axios';
-import Image from 'next/image';
-import React, { useState } from 'react'
+"use client";
+import axios from "axios";
+import Image from "next/image";
+import React, { useState } from "react";
 
-type Props = {}
+type Props = {};
 
 const Page = (props: Props) => {
-
   const [formData, setFormData] = useState({
-    prompt: '',
+    prompt: "",
     amount: 0,
-    resolution: ''
+    resolution: "",
   });
   const [photos, setPhotos] = useState<string[]>([]);
-
-
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -22,7 +19,7 @@ const Page = (props: Props) => {
       [e.target.name]: e.target.value,
     });
   };
-  console.log(formData)
+  console.log(formData);
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
@@ -31,13 +28,13 @@ const Page = (props: Props) => {
         ...formData,
       });
       if (res.data.data) {
-        console.log(res)
+        console.log(res);
 
         const urls = res.data.data.map((image: { url: string }) => image.url);
 
         setPhotos(urls);
-        console.log("hii we are getting data")
-        console.log(res.data)
+        console.log("hii we are getting data");
+        console.log(res.data);
       } else {
         console.log("error");
       }
@@ -46,15 +43,14 @@ const Page = (props: Props) => {
     }
   };
 
-
   return (
     <>
-      <div className="flex flex-col justify-between items-center w-full min-h-screen bg-gray-900 text-gray-200 px-10 pb-10">
-        <h1 className=" text-4xl text-green-500 font-bold pt-5">
+      <div className="flex flex-col justify-start items-center w-full min-h-screen bg-gray-900 text-gray-200 px-10 pb-10">
+        <h1 className=" text-4xl text-[#64ff4c] font-bold pt-5">
           Image Genarater
         </h1>
-        <form onSubmit={handleSubmit}>
-          <div className=" w-full flex justify-between py-10">
+        <form className="flex w-full" onSubmit={handleSubmit}>
+          <div className=" w-full flex justify-between py-10 gap-4">
             <div className=" w-[100%]">
               <input
                 type="text"
@@ -62,7 +58,7 @@ const Page = (props: Props) => {
                 name="prompt"
                 value={formData.prompt}
                 onChange={handleChange}
-                className=" w-full h-7 border  text-gray-900 text-sm rounded-lg block py-5 px-5 bg-slate-700 border-gray-500 outline-none placeholder-gray-400 focus:ring-green-500 focus:border-green-500"
+                className=" w-full h-7 border  text-gray-200 text-sm rounded-lg block py-5 px-5 bg-slate-700 border-gray-500 outline-none placeholder-gray-400 focus:ring-[#64ff4c] focus:border-[#64ff4c]"
               />
             </div>
             <div className=" flex gap-4">
@@ -71,7 +67,7 @@ const Page = (props: Props) => {
                   id="amount"
                   name="amount"
                   onChange={handleChange}
-                  className="block w-full p-2  text-sm  border  rounded-lg bg-slate-700 text-slate-400 border-gray-500 outline-none placeholder-gray-400 focus:ring-green-500 focus:border-green-500"
+                  className="block w-full p-[10px]  text-sm  border  rounded-lg bg-slate-700 text-slate-400 border-gray-500 outline-none placeholder-gray-400 focus:ring-[#64ff4c] focus:border-[#64ff4c]"
                 >
                   <option defaultValue={0}>No of amount</option>
                   <option value={1}>1</option>
@@ -91,7 +87,7 @@ const Page = (props: Props) => {
                   id="resolution"
                   name="resolution"
                   onChange={handleChange}
-                  className="block w-full p-2  text-sm  border  rounded-lg bg-slate-700 text-slate-400 border-gray-500 outline-none placeholder-gray-400 focus:ring-green-500 focus:border-green-500"
+                  className="block w-full p-[10px]  text-sm  border  rounded-lg bg-slate-700 text-slate-400 border-gray-500 outline-none placeholder-gray-400 focus:ring-[#64ff4c] focus:border-[#64ff4c]"
                 >
                   <option defaultValue={0}>Choose a Resolution</option>
                   <option value="256x256">256 x 256</option>
@@ -99,13 +95,16 @@ const Page = (props: Props) => {
                   <option value="1024x1024">1024 x 1024</option>
                 </select>
               </div>
-              <button className=" bg-green-500 font-bold text-xl  rounded-md py-2 px-2" type='submit'>
+              <button
+                className=" bg-[#64ff4c] font-bold text-xl text-slate-700 rounded-md py-1 px-2"
+                type="submit"
+              >
                 Search
               </button>
             </div>
           </div>
         </form>
-        <div className=" flex flex-col justify-center items-center py-5">
+        <div className=" flex flex-col justify-center items-center py-8">
           {/* <div>
             {selected ? (
               <div className=" flex h-96 w-80 mb-10">
@@ -119,14 +118,17 @@ const Page = (props: Props) => {
               {photos.length >= 4 ? (
                 <span className=" grid grid-cols-4 gap-10 overflow-hidden ">
                   {photos.map((image, i) => (
-                    <>
+                    <div className="flex gap-4 flex-col" key={i}>
                       <img
-                        key={i}
                         src={image}
-                        className="  rounded-md h-full w-full hover:scale-105 duration-1000 shadow-sm shadow-green-500"
+                        className="  rounded-md h-full w-full hover:scale-105 duration-1000 shadow-sm shadow-[#64ff4c]"
                       />
-                      <a href={image} key={i} download>Download </a>
-                    </>
+                      <button className=" w-full py-2 rounded-md bg-[#64ff4c] text-slate-700 font-bold ">
+                        <a href={image} key={i} download>
+                          Download ⬇️
+                        </a>
+                      </button>
+                    </div>
                   ))}
                 </span>
               ) : (
@@ -138,7 +140,9 @@ const Page = (props: Props) => {
                         src={image}
                         className=" rounded-md h-96 w-80  hover:scale-110 duration-1000 "
                       />
-                      <button onClick={() => window.open(image)}>Download</button>
+                      <button onClick={() => window.open(image)}>
+                        Download
+                      </button>
                     </>
                   ))}
                 </span>
@@ -148,7 +152,7 @@ const Page = (props: Props) => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Page
+export default Page;
