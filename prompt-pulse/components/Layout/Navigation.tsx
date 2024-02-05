@@ -21,13 +21,18 @@ const navItems = [
         link: "/marketplace"
     },
     {
+        name: "Image Generator",
+        link: "/image"
+    },
+    {
         name: "Contact Us",
         link: "/contact"
     },
     {
         name: "Policy",
         link: "/policy"
-    }
+    },
+
 ]
 
 const Navigation = () => {

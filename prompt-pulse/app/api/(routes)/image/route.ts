@@ -1,6 +1,8 @@
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 import OpenAI from 'openai';
+import { incrementApiLimit, checkApiLimit } from "@/lib/api-limit";
+import { checkSubscription } from "@/lib/subscription";
 
 
 const openai = new OpenAI({
@@ -37,8 +39,15 @@ export async function POST(
       return new NextResponse("Resolution is required", { status: 400 });
     }
 
+    const freeTrial = await checkApiLimit();
+    const isPro = await checkSubscription();
+
+    if (!freeTrial && !isPro) {
+      return new NextResponse("Free trial has expired. Please upgrade to pro.", { status: 403 });
+    }
+
     const options = {
-      method:"POST",
+      method: "POST",
       headers: {
         "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`,
         "Content-Type": "application/json",
@@ -50,11 +59,14 @@ export async function POST(
       }),
     }
 
+    if (!isPro) {
+      await incrementApiLimit();
+    }
 
- const response = await fetch('https://api.openai.com/v1/images/generations', options);
- const data = await response.json();
+    const response = await fetch('https://api.openai.com/v1/images/generations', options);
+    const data = await response.json();
 
- console.log(data);
+    console.log(data);
 
     return NextResponse.json(data);
   } catch (error) {
