@@ -134,16 +134,18 @@ const Page = (props: Props) => {
               ) : (
                 <span className=" flex w-full overflow-hidden  items-center gap-10 ">
                   {photos.map((image, i) => (
-                    <>
+                    <div className="flex gap-4 flex-col" key={i}>
                       <img
                         key={i}
                         src={image}
                         className=" rounded-md h-96 w-80  hover:scale-110 duration-1000 "
                       />
-                      <button onClick={() => window.open(image)}>
-                        Download
+                      <button className=" w-full py-2 rounded-md bg-[#64ff4c] text-slate-700 font-bold ">
+                        <a href={image} key={i} download>
+                          Download ⬇️
+                        </a>
                       </button>
-                    </>
+                    </div>
                   ))}
                 </span>
               )}
