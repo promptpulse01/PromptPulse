@@ -4,18 +4,18 @@ import React, { useState } from "react";
 import { toast } from "sonner";
 
 type Props = {
-  freetrial:any,
-  ispro:any
+  freetrial: any;
+  ispro: any;
 };
 
-const ImageGenerator = ({freetrial,ispro}: Props) => {
+const ImageGenerator = ({ freetrial, ispro }: Props) => {
   const [formData, setFormData] = useState({
     prompt: "",
     amount: 0,
     resolution: "",
   });
   const [photos, setPhotos] = useState<string[]>([]);
-
+  const [isModelOpen, setIsModelOpen] = useState(false);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
@@ -54,15 +54,59 @@ const ImageGenerator = ({freetrial,ispro}: Props) => {
     } catch (error) {
       toast.error("Something went wrong");
     }
-  }
+  };
 
-  const onSubscribe = ()=>{
-    console.log("modal open")
-  }
+  const onSubscribe = () => {
+    setIsModelOpen(true);
+  };
 
   return (
     <>
-      <div className="flex flex-col justify-start items-center w-full min-h-screen bg-gray-900 text-gray-200 px-10 pb-10">
+      <div
+        className={` relative z-0 flex flex-col justify-start items-center w-full min-h-screen bg-gray-900 text-gray-200 px-10 pb-10 ${
+          isModelOpen ? "" : ""
+        }`}
+        onClick={() => {
+          isModelOpen && setIsModelOpen(false);
+        }}
+      >
+        {isModelOpen ? (
+          <div
+            className="fixed z-1  top-[50%] left-[50%]  -translate-x-[50%] -translate-y-[50%] bg-slate-950/90 h-[70%] w-[30%]  rounded-md border border-solid border-[#64ff4c] "
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className=" relative flex w-full h-full py-2  pb-0 px-4">
+              <button
+                className=" fixed -top-4  -right-4 bg-slate-950 px-2  rounded-full font-semibold text-4xl text-[#64ff4c] border-solid border-2 border-[#64ff4c]"
+                onClick={() => {
+                  setIsModelOpen(false);
+                }}
+              >
+                x
+              </button>
+              <div className="py-8  flex flex-col justify-between  gap-10">
+                <div className=" flex flex-col gap-8">
+                  <h1 className=" text-4xl font-bold space-y-2">
+                    Your limit for free{" "}
+                    <span className=" text-[#64ff4c]">image genarete</span> is
+                    <span className=" text-red-500"> full ....</span>
+                  </h1>
+                  <h2 className=" text-2xl ">
+                    For more image genarate you can take a subscription plan by
+                    clicking on below ⬇️ button <button></button>
+                  </h2>
+                </div>
+                <button
+                  className="  flex py-2 px-8  text-slate-700 font-bold text-xl bg-[#64ff4c] rounded-md"
+                  onClick={() => OnUpgrade()}
+                >
+                  Subscribe For More Image Genarate
+                </button>
+              </div>
+            </div>
+          </div>
+        ) : null}
+
         <h1 className=" text-4xl text-[#64ff4c] font-bold pt-5">
           Image Genarater
         </h1>
@@ -107,26 +151,36 @@ const ImageGenerator = ({freetrial,ispro}: Props) => {
                   <option value="1024x1024">1024 x 1024</option>
                 </select>
               </div>
-             {freetrial || ispro ? (
-              <>
-               <button
-                className=" bg-[#64ff4c] font-bold text-xl text-slate-700 rounded-md py-1 px-2"
-                type="submit"
-              >
-                Search
-              </button>
-              </>
-             ):(
-              <>
-              <button
-               className=" bg-[#64ff4c] font-bold text-xl text-slate-700 rounded-md py-1 px-2"
-               type="submit"
-               onClick={onSubscribe}
-             >
-               Subscribe
-             </button>
-             </>
-             )}
+              {freetrial || ispro ? (
+                <>
+                  <button
+                    className=" bg-[#64ff4c] font-bold text-xl text-slate-700 rounded-md py-1 px-2"
+                    type="submit"
+                  >
+                    Search
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button
+                    className=" bg-[#64ff4c] font-bold text-xl text-slate-700 rounded-md py-1 px-2"
+                    type="submit"
+                    onClick={() => onSubscribe()}
+                  >
+                    Subscribe
+                  </button>
+                </>
+              )}
+              {/* FOR CHECK SUBSCRIPTION FUNCTIONALITY */}
+              {/* <>
+                <button
+                  className=" bg-[#64ff4c] font-bold text-xl text-slate-700 rounded-md py-1 px-2"
+                  type="submit"
+                  onClick={() => onSubscribe()}
+                >
+                  Subscribe
+                </button>
+              </> */}
             </div>
           </div>
         </form>
