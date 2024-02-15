@@ -1,14 +1,15 @@
 "use client";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 type Props = {
-  freetrial: any;
-  ispro: any;
+  freetrial: boolean;
+  ispro: boolean;
+  limitCount: number
 };
 
-const ImageGenerator = ({ freetrial, ispro }: Props) => {
+const ImageGenerator = ({ freetrial, ispro, limitCount }: Props) => {
   const [formData, setFormData] = useState({
     prompt: "",
     amount: 0,
@@ -16,28 +17,37 @@ const ImageGenerator = ({ freetrial, ispro }: Props) => {
   });
   const [photos, setPhotos] = useState<string[]>([]);
   const [isModelOpen, setIsModelOpen] = useState(false);
+  const [limit, setLimit] = useState(limitCount);
+  const [freeTrial, setFreeTrial] = useState(freetrial);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
   };
-  console.log(formData);
+  useEffect(() => {
+    if (limit >= 5) {
+      setFreeTrial(false)
+    }
+  }, [limit])
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     try {
       setPhotos([]);
       const res = await axios.post("/api/image", {
         ...formData,
       });
+
       if (res.data.data) {
-        console.log(res);
-
         const urls = res.data.data.map((image: { url: string }) => image.url);
-
         setPhotos(urls);
-        console.log("hii we are getting data");
-        console.log(res.data);
+        setLimit(limit + 1)
+        setFormData({
+          prompt: "",
+          amount: 0,
+          resolution: "",
+        })
       } else {
         console.log("error");
       }
@@ -213,6 +223,7 @@ const ImageGenerator = ({ freetrial, ispro }: Props) => {
                   id="amount"
                   name="amount"
                   onChange={handleChange}
+                  value={formData.amount}
                   className="block w-full p-[10px]  text-sm  border  rounded-lg bg-slate-700 text-slate-400 border-gray-500 outline-none placeholder-gray-400 focus:ring-[#64ff4c] focus:border-[#64ff4c]"
                 >
                   <option defaultValue={0}>No of amount</option>
@@ -228,6 +239,7 @@ const ImageGenerator = ({ freetrial, ispro }: Props) => {
                   id="resolution"
                   name="resolution"
                   onChange={handleChange}
+                  value={formData.resolution}
                   className="block w-full p-[10px]  text-sm  border  rounded-lg bg-slate-700 text-slate-400 border-gray-500 outline-none placeholder-gray-400 focus:ring-[#64ff4c] focus:border-[#64ff4c]"
                 >
                   <option defaultValue={0}>Choose a Resolution</option>
@@ -236,7 +248,7 @@ const ImageGenerator = ({ freetrial, ispro }: Props) => {
                   <option value="1024x1024">1024 x 1024</option>
                 </select>
               </div>
-              {freetrial || ispro ? (
+              {freeTrial || ispro ? (
                 <>
                   <button
                     className=" bg-[#64ff4c] font-bold text-xl text-slate-700 rounded-md py-1 px-2"
@@ -279,10 +291,10 @@ const ImageGenerator = ({ freetrial, ispro }: Props) => {
           </div> */}
           {!freetrial && !ispro ? (
             <>
-              <h1 className=" text-3xl font-fold tracking-wider mt-16">
+              <h1 className=" text-3xl font-semibold tracking-wider mt-16">
                 Your free trial has ended. To continue using this feature,
                 please subscribe
-                <span className="  ">to a paid plan.</span>
+                <span className="ml-1 text-[#858DFB] ">to our paid plan.</span>
               </h1>
             </>
           ) : null}
